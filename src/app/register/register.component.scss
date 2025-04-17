@@ -1,0 +1,155 @@
+
+.form{
+display: flex;
+max-width: 800px;
+justify-content: space-between;
+margin: 50px auto;
+padding: 20px;
+border: 1px solid #ccc;
+border-radius: 12px;
+background-color: white;
+
+ 
+  
+}
+
+.left-section {
+  flex: 1;
+  padding-right: auto;
+}
+
+
+.right-section{
+  flex: 2;
+  padding: auto;
+
+}
+
+.logo {
+    width: 60px; // You can adjust this size (e.g., 60px, 100px, etc.)
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+.form-title{
+    text-align: left;
+    color: #1f1f1f;
+    font-family: arial;
+}
+
+.input-field{
+
+    width: 80%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.submit-btn{
+    width: 100%;
+    padding: 12px;
+    background-color: #1a73e8;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.submit-btn:hover {
+    background-color: #155ab6;
+  }
+
+
+
+
+  
+  /*-------------------------------
+  for div
+.register-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: white;
+    padding: 40px 60px;
+    border-radius: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1000px;
+    margin: 50px auto;
+    background-color: #fff;
+  }
+  
+  .left-section {
+    flex: 1;
+    padding-right: 40px;
+  }
+  
+  .logo {
+    width: 75px;
+    margin-bottom: 20px;
+  }
+  
+  .left-section h2 {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #202124;
+  }
+  
+  .left-section p {
+    font-size: 16px;
+    color: #5f6368;
+  }
+  
+  .right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .form-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .full-width {
+    flex-direction: column;
+  }
+  
+  input, select {
+    padding: 14px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+  }
+  
+  .next-button {
+    align-self: flex-end;
+    padding: 12px 24px;
+    background-color: #1a73e8;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .next-button:hover {
+    background-color: #1967d2;
+  }
+  
+  */
+  
