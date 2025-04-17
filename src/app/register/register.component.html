@@ -1,31 +1,102 @@
 
-<form action="" method="post" class="form">
-    <div class = "left-side">
+<!-- Form -->
+<form [formGroup]="registration" (ngSubmit)="onSubmit()" action="" method="post" class="form">
+
+    <div class = "left-section">
+
         <img src="assets\images\googlelogo.png" alt="Google logo" class="logo">
         <h1 class="form-title">Create a Google Account</h1>
+    
     </div>
     
 
-    <div class = "right-side">
+    <div class = "right-section">
+      
+        <!-- First Name -->
+        <mat-form-field appearance="outline" class="full-width">
+    
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName = "firstName" type="text" required>
+
+            <mat-error *ngIf="f['firstName'].touched && f['firstName'].errors?.['required']"> 
+               Please Enter FirstName</mat-error>    <!--  -->
+            
+            <mat-error *ngIf="f['firstName'].errors?.['minlength']">
+                Minimum 3 characters</mat-error> 
+        </mat-form-field>
+              
+        <!-- Last Name -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Last name</mat-label>
+            <input matInput  formControlName = "lastName" type="text" required>
+            
+            <mat-error *ngIf ="f['lastName'].touched && f['lastName'].errors?.['required']">
+                Please Enter LastName</mat-error>
+            <mat-error *ngIf="f['lastName'].errors?.['minlength']">
+                    Minimum 3 characters</mat-error> 
+            
+            
+        </mat-form-field><br>
+
+        <!-- Date of birth -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Date</mat-label>
+            <input matInput formControlName = "date" type="date" required>
+
+            <mat-error *ngIf="f['date'].touched && f['date'].errors?.['required']"> 
+                Date is required</mat-error> 
+        </mat-form-field><br>
+
+
+        <!-- Gender -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Gender</mat-label>
+            <mat-select name = "gender" matInput formControlName = "gender">
+
+                <mat-error *ngIf="f['gender'].touched && f['gender'].errors?.['required']"> 
+                    please select gender</mat-error> 
+                <mat-option value="">Gender</mat-option>
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+                <mat-option value="not_say">Rather not say</mat-option>
+                <mat-option value="custom">Custom</mat-option>
+            </mat-select>
+        </mat-form-field><br>
+    
+
+        <!-- Email -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email </mat-label>
+            <input matInput  formControlName = "email" type="text" required>
+            
+            <mat-error *ngIf="f['email'].touched && f['email'].errors?.['required']"> 
+                Email is required</mat-error> 
+
+            
+        </mat-form-field><br>
+
+
+        <!-- Passsword -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName = "password" type="text" required>
+            <mat-error *ngIf="f['password'].touched && f['password'].errors?.['required']"> 
+                please enter password </mat-error> 
+
+        </mat-form-field><br>
+
+
+        <!-- Cofirm Password -->
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput formControlName = "confirmPassword" type="text" required>
+            <mat-error *ngIf="f['confirmPassword'].touched && f['confirmPassword'].errors?.['required']"> 
+                required Confirm Password</mat-error> 
+        </mat-form-field><br>
         
-        <input type="text" placeholder="First name" class="input-field"> <br>
-        <input type="text" placeholder="Last name (optional)" class="input-field"><br>
-        <input type="date" placeholder="Date Of Birth" class="input-field"><br>
-
-        <!--<input type="list" placeholder="Gender" ><br>  -->
-    <label for = "gender"></label> 
-        <select name="gender" class="input-field" >
-            <option value="">Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="not_say">Rather not say</option>
-            <option value="custom">Custom</option>
-        </select><br>
-
-        <input type="email" placeholder="Email" class="input-field"><br>
-        <input type="password" placeholder="Password" class="input-field"><br>
-        <input type="password" placeholder="Confirm Password" class="input-field"><br>
+    
         <input type="submit" value="Register" class="submit-btn"><br>
+    
     </div>
 </form>
 
@@ -34,55 +105,6 @@
 
 
 
-<!-- using Div 
-<div class="register-container">
-    <div class="left-section">
-        <img src="https://ssl.gstatic.com/accounts/ui/logo_2x.png" alt="Google logo" class="logo">
-        <h2> Create a Google Account</h2>    
-        
-    </div>
-
-</div>
-
-
-<form class="right-section">
-    <div class="form-group">
-        <input type="text" placeholder="First name" class="input-field"> <br><br>
-        <input type="text" placeholder="Last name (optional)" class="input-field"><br><br>
-    </div>
-
-    <div class="form-group full-width">
-        <input type="date" placeholder="Date of Birth">
-    </div>
-
-
-        <div class ="form-group full-width">
-            <select>
-                <option value="">Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="not_say">Rather not say</option>
-                <option value="custom">Custom</option>
-            </select>
-        </div>
-
-
-        <div class="form-group full-width">
-            <input type="email" placeholder="Email">
-        </div>
-
-
-        <div class="form-gr
-        oup full-width">
-            <input type="password" placeholder="Password">
-            <input type="password" placeholder="Confirm Password">
-        </div>
-
-        <button type="submit" class="Register"></button>
-</form>
-
-
--->
 
 
 <!-- FirstName , LastName , DOB , genedr ,Email ,Password , ConfirmPassword-->

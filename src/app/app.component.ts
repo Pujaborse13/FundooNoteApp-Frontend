@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RegisterComponent } from './register/register.component';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +9,4 @@ import { RegisterComponent } from './register/register.component';
 
 export class AppComponent {
   title = 'FundooNoteApp';
-  name = 'puja borse';
 }
