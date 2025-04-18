@@ -1,16 +1,33 @@
-<p>login works!</p>
 
-<form action="" method="post" class="form">
+<div class="page-container">
 
-   <div > 
+<form [formGroup]="login" (ngSubmit)="onSubmit()" action="" method="post" class="form">
+
+   <div class="left-section" > 
     <img src="assets\images\googlelogo.png" alt="Google logo" class="logo">
     <h1 class="form-title">Sign in</h1>
   </div> 
 
 
-    <input type="email" placeholder="Email"><br><br>
+  <div class="right-section">
+     <!-- Email -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label> Email </mat-label>
+      <input matInput  formControlName = "email" type="text" required>
+      
+      <mat-error *ngIf="f['email'].touched && f['email'].errors?.['required']"> 
+          Email is required</mat-error> 
+    </mat-form-field><br>
 
-    <input type="password" placeholder="Password"><br><br>
-    <input type="submit" value="Login" class="submit-btn">
-
+  <!-- Password -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Password</mat-label>
+    <input matInput formControlName = "password" type="text" required>
+    <mat-error *ngIf="f['password'].touched && f['password'].errors?.['required']"> 
+        please enter password </mat-error> 
+  </mat-form-field><br>    
+  
+  <input type="submit" value="Login" class="submit-btn">
+  </div>
 </form>
+</div>

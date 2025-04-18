@@ -1,5 +1,7 @@
 import { Component ,OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router'
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +14,7 @@ export class RegisterComponent implements OnInit
 {
     registration! :FormGroup 
 
-    constructor(private fb :FormBuilder) {}
+    constructor(private fb :FormBuilder ,private router: Router) {}
   
     ngOnInit(): void {
     this.registration  = this.fb.group({
@@ -41,15 +43,20 @@ export class RegisterComponent implements OnInit
     onSubmit(): void {
       if(this.registration.valid)
       {
+        const formData = this.registration.value;
+        localStorage.setItem('user', JSON.stringify(formData));
+        console.log('Form Data Stored in Local Storage:', formData);
+
+        //redirect to login page
         console.log('Form Data:', this.registration.value);
+        this.router.navigate(['login']);
       }
       else{
         this.registration.markAllAsTouched();
       }
-      
-        
-
+     
     }
+
 
   }
 
