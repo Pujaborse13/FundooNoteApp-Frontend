@@ -95,6 +95,20 @@ background-color: white;
   .right-section{
     flex: 1 1 55%;
   }
+
 }
+
+.success-snackbar {
+  background-color: #4caf50; 
+  color: white;
+  font-weight: bold;
+}
+
+.error-snackbar {
+  background-color: #f44336; 
+  color: white;
+  font-weight: bold;
+}
+
 
 

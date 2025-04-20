@@ -1,6 +1,6 @@
 import { Component ,OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,8 +10,13 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 export class LoginComponent implements OnInit {
 
   login!: FormGroup;
-  constructor(private fb :FormBuilder) {}
+  constructor(private fb :FormBuilder,private router: Router) {}
 
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
+
+  
   ngOnInit(): void {
     this.login  = this.fb.group({
       email:  ['', [Validators.required, Validators.email]],

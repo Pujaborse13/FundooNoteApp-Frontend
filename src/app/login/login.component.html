@@ -27,7 +27,12 @@
         please enter password </mat-error> 
   </mat-form-field><br>    
   
-  <input type="submit" value="Login" class="submit-btn">
+  <div class="button-row">
+    <button type="button" class="create-account-btn" (click)="goToRegister()">Create Google Account</button>
+    <button type="submit" class="login-btn">Login</button>
+  </div>
+
+  
   </div>
 </form>
 </div>
