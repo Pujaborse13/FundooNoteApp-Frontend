@@ -14,13 +14,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +40,14 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule, 
     MatSnackBarModule,    
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatCardModule,
+    MatGridListModule,
+    
     
     
 

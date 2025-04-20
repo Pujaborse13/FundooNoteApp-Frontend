@@ -20,6 +20,10 @@ export class UserService {
     return this.http.postApi('/registeruser', payload);
   }
 
+  login(payload : any)
+  {
+    return this.http.postApi('/login',payload);
+  }
 
 
   

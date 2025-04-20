@@ -1,0 +1,70 @@
+<div class="dashboard">
+    
+    <!-- Header -->
+    <mat-toolbar  class="header">
+      <button mat-icon-button (click)="sidenav.toggle()" aria-label="Toggle sidenav">
+        <mat-icon>menu</mat-icon>
+      </button>
+      
+      <span class="title">FunDoo</span>
+      <span class="spacer"></span>
+
+
+     <div class="search-container">
+        <button mat-icon-button aria-label="Search">
+        <mat-icon>search</mat-icon>
+       </button>
+        <input type="text" placeholder="Search" class="search-input" />
+    </div> 
+      
+
+      <!-- <div class="search-container">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input type="text" placeholder="Search" class="search-input" />
+      </div> -->
+
+      
+
+      <!-- google search tab 
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <div class="search-container">
+        <span class="material-icons search-icon">search</span>
+        <input type="text" placeholder="Search" class="search-input" />
+        </div> 
+      -->
+      
+      
+      
+      <button mat-icon-button aria-label="Refresh">
+        <mat-icon>refresh</mat-icon>
+      </button>
+      
+      <button mat-icon-button aria-label="Settings">
+        <mat-icon>settings</mat-icon>
+      </button>
+     
+      <button mat-icon-button aria-label="Profile">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    
+    </mat-toolbar>
+  
+    <!-- Sidenav layout -->
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav #sidenav mode="side" opened class="sidenav">
+        
+        <mat-nav-list>
+          <mat-list-item><mat-icon>lightbulb</mat-icon> Notes</mat-list-item>
+          <mat-list-item><mat-icon>notifications</mat-icon> Reminders</mat-list-item>
+          <mat-list-item><mat-icon>label</mat-icon> Labels</mat-list-item>
+          <mat-list-item><mat-icon>archive</mat-icon> Archive</mat-list-item>
+          <mat-list-item><mat-icon>delete</mat-icon> Trash</mat-list-item>
+        </mat-nav-list>
+      
+    </mat-sidenav>
+  
+      
+        
+    </mat-sidenav-container>
+  </div>
+  

@@ -1,0 +1,67 @@
+.dashboard {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border: 1px solid rgb(147, 146, 146);
+    font-family: 'Arial Narrow', Arial, sans-serif;
+  }
+  
+  .sidenav-container {
+    flex: 1;
+    display: flex;
+  }
+  
+  .sidenav {
+    width: 200px;
+  }
+  
+  .title {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 25px;
+    padding: 5px 10px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    width: 600px;
+    margin-left: 50px;
+    border: 1px solid #ddd;
+  }
+  
+  .search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-icon {
+    font-size: 22px;
+    color: gray;
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    width: 100%;
+    background: transparent;
+  }
+  

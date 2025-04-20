@@ -13,9 +13,7 @@ import { UserService } from '../services/user/user.service';
 
 export class RegisterComponent implements OnInit
 {
-  hidePassword = true;
-  hideConfirm = true;
-    
+  
   registration! :FormGroup 
 
     constructor(private fb :FormBuilder ,
