@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
               {
                 console.log('Login Success:', result);  
 
-                localStorage.setItem('token', result.token);
+                localStorage.setItem('token', result.data);
                 // const token = localStorage.getItem('token');
                 //console.log('Token:',token);
                 //this.router.navigateByUrl('dashboard/login')
