@@ -21,6 +21,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { AddNoteComponent } from './add-note/add-note.component';
+import { FormsModule } from '@angular/forms';
+
+
+
 
 
 @NgModule({
@@ -28,7 +34,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddNoteComponent
   ],
   imports: [
     BrowserModule,
@@ -47,10 +54,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
+    MatMenuModule,
+    FormsModule
     
     
-    
-
   ],
   providers: [],
   bootstrap: [AppComponent]

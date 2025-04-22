@@ -29,6 +29,6 @@ export class HttpService {
   {
     return this.http.post(this.BASE_URL + endpoint, payload,{headers});
   }
-
+  
 }
 

@@ -1,0 +1,96 @@
+.add-note-card,
+.add-note-expanded {
+  width: 600px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: auto;
+  margin-top: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.add-note-card:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+input,
+textarea {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+  resize: none;
+  margin: 5px 0;
+  background: transparent;
+}
+
+.title-pin-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pin-button {
+  color: gray;
+  height: 36px;
+  width: 36px;
+}
+
+.add-note-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  color: gray;
+}
+
+.left-icons {
+  display: flex;
+  gap: 5px;
+}
+
+.add-note-expanded-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.color-palette {
+    position: absolute;
+    top: 100%;
+    margin-top: 8px;
+    z-index: 10;
+  
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  
+    width: max-content;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+  }
+
+.color-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.add-note-expanded {
+  background-color: var(--note-bg, #ffffff);
+}
+
+.add-note-expanded input,
+.add-note-expanded textarea {
+  background-color: inherit;
+}

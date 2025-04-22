@@ -1,74 +1,125 @@
 .dashboard {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border: 1px solid rgb(147, 146, 146);
-    font-family: 'Arial Narrow', Arial, sans-serif;
-  }
-  
-  .sidenav-container {
-    flex: 1;
-    display: flex;
-  }
-  
-  .sidenav {
-    width: 200px;
-  }
-  
-  .title {
-    margin-left: 10px;
-    font-weight: bold;
-  }
-  
-  .spacer {
-    flex: 1 1 auto;
-  }
-  
-  .search-container {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border-radius: 25px;
-    padding: 5px 10px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-    width: 600px;
-    margin-left: 50px;
-    border: 1px solid #ddd;
-  }
-  
-  .search-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .search-icon {
-    font-size: 22px;
-    color: gray;
-  }
-  
-  .search-input {
-    border: none;
-    outline: none;
-    font-size: 16px;
-    width: 100%;
-    background: transparent;
-  }
-  
-  .logo {
-    height: 32px;
-    width: 32px;
-    margin-right: 8px;
-    vertical-align: middle;
-  }
-  
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Arial', sans-serif;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #d3d3d3;
+  background-color: white;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: gray;
+}
+
+.logo {
+  height: 32px;
+  width: 32px;
+  margin-right: 8px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: normal;
+  color: gray;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: #f1f3f4;
+  border-radius: 8px;
+  padding: 2px 5px;
+  width: 700px;
+  border: 1px solid #e0e0e0;
+  margin-right: 90px;
+  transition: background-color 0.3s ease;
+}
+
+.search-container:focus-within {
+  background-color: #ffffff;
+  border: 1px solid #c0c0c0;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  width: 100%;
+  margin-left: 8px;
+}
+
+.sub-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sub-icons-one,
+.sub-icons-two {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.sidenav {
+  width: 240px;
+  transition: width 0.3s ease;
+}
+
+.sidenav.collapsed {
+  width: 70px;
+}
+
+.sidenav-list button {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 0 25px 25px 0;
+  font-size: 14px;
+}
+
+.sidenav-list mat-icon {
+  color: gray;
+  font-size: 24px;
+}
+
+.sidenav-list span {
+  color: black;
+  font-weight: 500;
+}
+
+.sidenav-list button:hover {
+  background-color: rgb(254, 239, 195);
+}
+
+.sidenav-list button.active {
+  background-color: #fff9c4;
+}
+
+button[matMenuTriggerFor] {
+  outline: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+}

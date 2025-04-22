@@ -66,6 +66,7 @@ export class RegisterComponent implements OnInit
         const formData = this.registration.value;
         localStorage.setItem('user', JSON.stringify(formData));
 
+        
         console.log('Form Data Stored in Local Storage:', formData);
 
           const payload={

@@ -1,66 +1,105 @@
+
+  <!-- HTML for Fundoo Keep Clone -->
 <div class="dashboard">
-    
-    <!-- Header -->
-    <mat-toolbar  class="header">
-      <button mat-icon-button (click)="sidenav.toggle()" aria-label="Toggle sidenav">
-        <mat-icon>menu</mat-icon>
+  <!-- Header -->
+  <mat-toolbar class="header">
+    <div class="header-icons">`
+
+      <button mat-icon-button (click)="toggleSidenav()" aria-label="Toggle sidenav">
+        <mat-icon fontSet="material-icons-outlined">menu</mat-icon>
       </button>
       
+      <!-- <button mat-icon-button (click)="sidenav.toggle()" aria-label="Toggle sidenav">
+        <mat-icon fontSet="material-icons-outlined">menu</mat-icon>
+      </button> -->
+
+      <!-- App Logo and Title -->
       <img src="assets/images/keep.png" alt="logo" class="logo" />
-      
       <span class="title">FunDoo</span>
+
+      <!-- Spacer pushes search and icons to right -->
       <span class="spacer"></span>
 
-
-     <!-- <div class="search-container">
+      <!-- Search Bar -->
+      <div class="search-container">
         <button mat-icon-button aria-label="Search">
-        <mat-icon>search</mat-icon>
-       </button>
+          <mat-icon fontSet="material-icons-outlined">search</mat-icon>
+        </button>
         <input type="text" placeholder="Search" class="search-input" />
-    </div>  -->
-      
+      </div>
 
+      <div class="sub-icons">
+        <div class="sub-icons-one">
+          <button mat-icon-button aria-label="Refresh">
+            <mat-icon fontSet="material-icons-outlined">refresh</mat-icon>
+          </button>
+
+          <button mat-icon-button aria-label="view_agenda">
+            <mat-icon fontSet="material-icons-outlined">view_agenda</mat-icon>
+          </button>
     
-      <!-- google search tab  -->
-       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <div class="search-container">
-        <span class="material-icons search-icon">search</span>
-        <input type="text" placeholder="Search" class="search-input" />
-        </div> 
-     
-      
-      
-      
-      <button mat-icon-button aria-label="Refresh">
-        <mat-icon>refresh</mat-icon>
-      </button>
-      
-      <button mat-icon-button aria-label="Settings">
-        <mat-icon>settings</mat-icon>
-      </button>
-     
-      <button mat-icon-button aria-label="Profile">
-        <mat-icon>account_circle</mat-icon>
-      </button>
-    
-    </mat-toolbar>
-  
-    <!-- Sidenav layout -->
-    <mat-sidenav-container class="sidenav-container">
-      <mat-sidenav #sidenav mode="side" opened class="sidenav">
+          <button mat-icon-button aria-label="Settings">
+            <mat-icon fontSet="material-icons-outlined">settings</mat-icon>
+          </button>
+      </div>
+
+        <div class="sub-icons-two">
+          <button mat-icon-button aria-label="Apps">
+            <mat-icon fontSet="material-icons-outlined">apps</mat-icon>
+          </button>
+          
+
+          <!-- <button mat-icon-button aria-label="Profile" [matMenuTriggerFor]="accountMenue"> -->
+            <button [matMenuTriggerFor]="accountMenu"  mat-icon-button aria-label="Profile" >
+            <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
+          </button>
         
-        <mat-nav-list>
-          <mat-list-item><mat-icon>lightbulb</mat-icon> Notes</mat-list-item>
-          <mat-list-item><mat-icon>notifications</mat-icon> Reminders</mat-list-item>
-          <mat-list-item><mat-icon>label</mat-icon> Labels</mat-list-item>
-          <mat-list-item><mat-icon>archive</mat-icon> Archive</mat-list-item>
-          <mat-list-item><mat-icon>delete</mat-icon> Trash</mat-list-item>
-        </mat-nav-list>
+        </div>
       
-    </mat-sidenav>
+      </div>
+    </div>
+  </mat-toolbar>
+
+
+  <!-- account menu dropdown -->
+  <mat-menu #accountMenu="matMenu">    
+    <button mat-menu-item class="logout-btn" (click)="logout()">
+      <mat-icon fontSet="material-icons-outlined">exit_to_app</mat-icon>
+      Logout
+    </button>
+  </mat-menu>
   
-      
-        
-    </mat-sidenav-container>
-  </div>
-  
+
+  <!-- Sidenav -->
+  <mat-sidenav #sidenav mode="side" [opened]="true" class="sidenav" [class.collapsed]="!isSidenavExpanded">
+    <mat-nav-list class="sidenav-list">
+      <button mat-list-item>
+        <mat-icon fontSet="material-icons-outlined">lightbulb</mat-icon>
+        <span *ngIf="isSidenavExpanded">Notes</span>
+      </button>
+      <button mat-list-item>
+        <mat-icon fontSet="material-icons-outlined">notifications</mat-icon>
+        <span *ngIf="isSidenavExpanded">Reminders</span>
+      </button>
+      <button mat-list-item>
+        <mat-icon fontSet="material-icons-outlined">label</mat-icon>
+        <span *ngIf="isSidenavExpanded">Labels</span>
+      </button>
+      <button mat-list-item>
+        <mat-icon fontSet="material-icons-outlined">archive</mat-icon>
+        <span *ngIf="isSidenavExpanded">Archive</span>
+      </button>
+      <button mat-list-item>
+        <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
+        <span *ngIf="isSidenavExpanded">Trash</span>
+      </button>
+    </mat-nav-list>
+  </mat-sidenav>
+
+</div>
+
+<!-- routed content: for add note -->
+<mat-sidenav-content>
+  <router-outlet></router-outlet>
+</mat-sidenav-content>
+
