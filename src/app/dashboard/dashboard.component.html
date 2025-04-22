@@ -1,76 +1,59 @@
+<!-- Full-width Toolbar at the Top -->
+<mat-toolbar class="header">
+  <div class="header-icons">
+    <button mat-icon-button (click)="toggleSidenav()" aria-label="Toggle sidenav">
+      <mat-icon fontSet="material-icons-outlined">menu</mat-icon>
+    </button>
 
-  <!-- HTML for Fundoo Keep Clone -->
-<div class="dashboard">
-  <!-- Header -->
-  <mat-toolbar class="header">
-    <div class="header-icons">`
+    <img src="assets/images/keep.png" alt="logo" class="logo" />
+    <span class="title">FunDoo</span>
 
-      <button mat-icon-button (click)="toggleSidenav()" aria-label="Toggle sidenav">
-        <mat-icon fontSet="material-icons-outlined">menu</mat-icon>
+    <span class="spacer"></span>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+
+      <button mat-icon-button aria-label="Search">
+        <mat-icon fontSet="material-icons-outlined">search</mat-icon>
       </button>
       
-      <!-- <button mat-icon-button (click)="sidenav.toggle()" aria-label="Toggle sidenav">
-        <mat-icon fontSet="material-icons-outlined">menu</mat-icon>
-      </button> -->
+      <input type="text" placeholder="Search" class="search-input" />
+    </div>
 
-      <!-- App Logo and Title -->
-      <img src="assets/images/keep.png" alt="logo" class="logo" />
-      <span class="title">FunDoo</span>
-
-      <!-- Spacer pushes search and icons to right -->
-      <span class="spacer"></span>
-
-      <!-- Search Bar -->
-      <div class="search-container">
-        <button mat-icon-button aria-label="Search">
-          <mat-icon fontSet="material-icons-outlined">search</mat-icon>
+    <div class="sub-icons">
+      <div class="sub-icons-one">
+        <button mat-icon-button aria-label="Refresh">
+          <mat-icon fontSet="material-icons-outlined">refresh</mat-icon>
         </button>
-        <input type="text" placeholder="Search" class="search-input" />
+        <button mat-icon-button aria-label="view_agenda">
+          <mat-icon fontSet="material-icons-outlined">view_agenda</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Settings">
+          <mat-icon fontSet="material-icons-outlined">settings</mat-icon>
+        </button>
       </div>
 
-      <div class="sub-icons">
-        <div class="sub-icons-one">
-          <button mat-icon-button aria-label="Refresh">
-            <mat-icon fontSet="material-icons-outlined">refresh</mat-icon>
-          </button>
-
-          <button mat-icon-button aria-label="view_agenda">
-            <mat-icon fontSet="material-icons-outlined">view_agenda</mat-icon>
-          </button>
-    
-          <button mat-icon-button aria-label="Settings">
-            <mat-icon fontSet="material-icons-outlined">settings</mat-icon>
-          </button>
-      </div>
-
-        <div class="sub-icons-two">
-          <button mat-icon-button aria-label="Apps">
-            <mat-icon fontSet="material-icons-outlined">apps</mat-icon>
-          </button>
-          
-
-          <!-- <button mat-icon-button aria-label="Profile" [matMenuTriggerFor]="accountMenue"> -->
-            <button [matMenuTriggerFor]="accountMenu"  mat-icon-button aria-label="Profile" >
-            <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
-          </button>
-        
-        </div>
-      
+      <div class="sub-icons-two">
+        <button mat-icon-button aria-label="Apps">
+          <mat-icon fontSet="material-icons-outlined">apps</mat-icon>
+        </button>
+        <button [matMenuTriggerFor]="accountMenu" mat-icon-button aria-label="Profile">
+          <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
+        </button>
       </div>
     </div>
-  </mat-toolbar>
+  </div>
+</mat-toolbar>
 
+<mat-menu #accountMenu="matMenu">    
+  <button mat-menu-item class="logout-btn" (click)="logout()">
+    <mat-icon fontSet="material-icons-outlined">exit_to_app</mat-icon>
+    Logout
+  </button>
+</mat-menu>
 
-  <!-- account menu dropdown -->
-  <mat-menu #accountMenu="matMenu">    
-    <button mat-menu-item class="logout-btn" (click)="logout()">
-      <mat-icon fontSet="material-icons-outlined">exit_to_app</mat-icon>
-      Logout
-    </button>
-  </mat-menu>
-  
-
-  <!-- Sidenav -->
+<!-- Sidenav and Content Area BELOW toolbar -->
+<mat-sidenav-container class="dashboard">
   <mat-sidenav #sidenav mode="side" [opened]="true" class="sidenav" [class.collapsed]="!isSidenavExpanded">
     <mat-nav-list class="sidenav-list">
       <button mat-list-item>
@@ -96,10 +79,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-</div>
-
-<!-- routed content: for add note -->
-<mat-sidenav-content>
-  <router-outlet></router-outlet>
-</mat-sidenav-content>
-
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
