@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NoteService } from '../services/note/note.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+
 
 @Component({
   selector: 'app-add-note',
   templateUrl: './add-note.component.html',
   styleUrls: ['./add-note.component.scss']
 })
+
 export class AddNoteComponent implements OnInit {
   isExpanded = false;
   showColorPalette = false;
@@ -19,7 +24,7 @@ export class AddNoteComponent implements OnInit {
     '#d7aefb', '#fdcfe8', '#e6c9a8', '#e8eaed'
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,private noteService: NoteService, private snackBar:MatSnackBar) {}
 
   ngOnInit(): void {
     this.noteForm = this.fb.group({
@@ -32,9 +37,13 @@ export class AddNoteComponent implements OnInit {
     event.stopPropagation();
   }
 
+ 
   toggleColorPalette() {
+    console.log('Toggling color palette');
     this.showColorPalette = !this.showColorPalette;
   }
+
+
 
   selectColor(color: string) {
     this.selectedColor = color;
@@ -45,8 +54,32 @@ export class AddNoteComponent implements OnInit {
     this.isExpanded = true;
   }
 
+
+
   closeNote() {
-    console.log('Note:', this.noteForm.value);
+    if (this.noteForm.valid) {
+      
+      const payload = {
+        title: this.noteForm.value.title,
+        description: this.noteForm.value.description,
+        color: this.selectedColor
+      };
+
+      this.noteService.createNote(payload).subscribe({
+
+
+        next: (result: any) => {
+          console.log('Note created successfully:', result);
+          this.snackBar.open('Note added successfully!', 'Close', { duration: 3000 });
+        },
+
+        
+        error: (err:any) => {
+          console.error('Failed to create note:', err);
+        }
+      });
+    }
+
     this.noteForm.reset();
     this.selectedColor = '#ffffff';
     this.isExpanded = false;
@@ -54,8 +87,12 @@ export class AddNoteComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.noteForm.valid) {
-      console.log('Form Data:', this.noteForm.value);
-    }
+    this.closeNote();
   }
+  
 }
+  
+
+
+
+  
