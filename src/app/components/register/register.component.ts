@@ -2,7 +2,7 @@ import { Component ,OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router'
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserService } from '../services/user/user.service';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-register',
@@ -11,38 +11,34 @@ import { UserService } from '../services/user/user.service';
 })
 
 
-export class RegisterComponent implements OnInit
+export class RegisterComponent 
 {
   
-  registration! :FormGroup 
+  registration :FormGroup 
 
     constructor(private fb :FormBuilder ,
                 private router: Router , 
                 private snackBar:MatSnackBar, 
-                private user: UserService) {}
+                private user: UserService) {
+
+                  this.registration  = this.fb.group({
+                    firstName : ['',[Validators.required , Validators.minLength(3)]],
+                    lastName :['', [Validators.required, Validators.minLength(3)]],
+                    date:   ['', Validators.required],
+                    gender: ['', Validators.required],
+                    email:  ['', [Validators.required, Validators.email]],
+                    password: ['', [Validators.required, Validators.minLength(6)]],
+                    confirmPassword: ['', Validators.required]},
+                   
+                    { validators: this.matchPasswords });
+              
+                    // this.user.getAllUsers().subscribe(
+                    //   {
+                    //     next:(res) => console.log('Get Sucess:',res),
+                    //     error: (err) => console.error('GET error:', err)
+                    //   });
+                }
   
-    ngOnInit(): void 
-    {
-      this.registration  = this.fb.group({
-      firstName : ['',[Validators.required , Validators.minLength(3)]],
-      lastName :['', [Validators.required, Validators.minLength(3)]],
-      date:   ['', Validators.required],
-      gender: ['', Validators.required],
-      email:  ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]},
-     
-      { validators: this.matchPasswords });
-
-
-
-      this.user.getAllUsers().subscribe(
-        {
-          next:(res) => console.log('Get Sucess:',res),
-          error: (err) => console.error('GET error:', err)
-        });
-
-    }
 
     matchPasswords(control :AbstractControl) : ValidationErrors | null
     {
@@ -57,7 +53,7 @@ export class RegisterComponent implements OnInit
       return this.registration.controls;
     }
 
-    onSubmit(): void 
+    onSubmit()
     {
       if(this.registration.valid)
       {

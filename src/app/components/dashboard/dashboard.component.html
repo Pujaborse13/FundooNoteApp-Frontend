@@ -1,6 +1,7 @@
 <!-- Full-width Toolbar at the Top -->
 <mat-toolbar class="header">
   <div class="header-icons">
+    
     <button mat-icon-button (click)="toggleSidenav()" aria-label="Toggle sidenav">
       <mat-icon fontSet="material-icons-outlined">menu</mat-icon>
     </button>
@@ -21,6 +22,7 @@
     </div>
 
     <div class="sub-icons">
+
       <div class="sub-icons-one">
         <button mat-icon-button aria-label="Refresh">
           <mat-icon fontSet="material-icons-outlined">refresh</mat-icon>
@@ -55,27 +57,33 @@
 <!-- Sidenav and Content Area BELOW toolbar -->
 <mat-sidenav-container class="dashboard">
   <mat-sidenav #sidenav mode="side" [opened]="true" class="sidenav" [class.collapsed]="!isSidenavExpanded">
+    
     <mat-nav-list class="sidenav-list">
       <button mat-list-item>
         <mat-icon fontSet="material-icons-outlined">lightbulb</mat-icon>
         <span *ngIf="isSidenavExpanded">Notes</span>
       </button>
+      
       <button mat-list-item>
         <mat-icon fontSet="material-icons-outlined">notifications</mat-icon>
         <span *ngIf="isSidenavExpanded">Reminders</span>
       </button>
+      
       <button mat-list-item>
         <mat-icon fontSet="material-icons-outlined">label</mat-icon>
         <span *ngIf="isSidenavExpanded">Labels</span>
       </button>
+      
       <button mat-list-item>
         <mat-icon fontSet="material-icons-outlined">archive</mat-icon>
         <span *ngIf="isSidenavExpanded">Archive</span>
       </button>
+      
       <button mat-list-item>
         <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
         <span *ngIf="isSidenavExpanded">Trash</span>
       </button>
+    
     </mat-nav-list>
   </mat-sidenav>
 

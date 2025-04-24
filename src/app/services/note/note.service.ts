@@ -12,7 +12,7 @@ export class NoteService {
 
   createNote(payload: any)
   {
-    return this.http.postApi('/createNote',payload);
+    return this.http.postCreateNoteApi('/createNote',payload);
   }
 
 

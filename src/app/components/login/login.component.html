@@ -1,14 +1,13 @@
 
 <div class="page-container">
 
-<form [formGroup]="login" (ngSubmit)="onSubmit()" action="" method="post" class="form">
+  <form [formGroup]="login" (ngSubmit)="onSubmit()" action="" method="post" class="form">
 
-   <div class="left-section" > 
-    <img src="assets\images\googlelogo.png" alt="Google logo" class="logo">
-    <h1 class="form-title">Sign in</h1>
-    <p class="subtitle">with your Google Account. This account will be available to other Google apps in the browser.</p>
-
-  </div> 
+    <div class="left-section" > 
+      <img src="assets\images\googlelogo.png" alt="Google logo" class="logo">
+      <h1 class="form-title">Sign in</h1>
+      <p class="subtitle">with your Google Account. This account will be available to other Google apps in the browser.</p>
+    </div> 
 
 
   <div class="right-section">
@@ -16,18 +15,20 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label> Email or phone </mat-label>
       <input matInput  formControlName = "email" type="text" required>
-      
-      <mat-error *ngIf="f['email'].touched && f['email'].errors?.['required']"> 
-          Email is required</mat-error> 
+
+    <mat-error *ngIf="login.get('email')?.touched && login.get('email')?.errors?.['required']">   <!--chcek touched and empty -->
+      Email is required</mat-error> 
     </mat-form-field><br>
 
   <!-- Password -->
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Password</mat-label>
     <input matInput formControlName = "password" type="text" required>
-    <mat-error *ngIf="f['password'].touched && f['password'].errors?.['required']"> 
-        please enter password </mat-error> 
-  </mat-form-field><br>    
+    
+    <mat-error *ngIf= "login.get('password')?.touched && login.get('password')?.errors?.['required']">   
+      please enter password </mat-error> 
+    </mat-form-field><br>    
+  
   <a href="#" class="forgot-email">Forgot email?</a>
 
   <p class="guest-note">

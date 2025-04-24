@@ -11,19 +11,16 @@ export class DashboardComponent {
 
   constructor(private router: Router){}
 
-
-
-
   isSidenavExpanded = true;
 
     toggleSidenav() {
       this.isSidenavExpanded = !this.isSidenavExpanded;
     }
 
-    selectedItem: string = 'notes'; // default selected
-      selectItem(item: string): void {
+    selectedItem: string = 'notes';      selectItem(item: string): void {
        this.selectedItem = item;
      }
+
 
      logout()
       {

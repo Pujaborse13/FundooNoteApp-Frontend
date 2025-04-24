@@ -25,14 +25,6 @@ export class UserService {
     return this.http.postApi('/login',payload);
   }
 
-  createNote(payload: any)
-  {
-    return this.http.postApi('/createNote',payload);
-  }
-
-
-
-
-
+  
   
 }
