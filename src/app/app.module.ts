@@ -23,6 +23,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AddNoteComponent } from './components/add-note/add-note.component';
 import { FormsModule } from '@angular/forms';
 import { DisplayNotesComponent } from './components/display-notes/display-notes.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AllNotesComponent } from './all-notes/all-notes.component';
 
 
 
@@ -34,7 +36,8 @@ import { DisplayNotesComponent } from './components/display-notes/display-notes.
     LoginComponent,
     DashboardComponent,
     AddNoteComponent,
-    DisplayNotesComponent
+    DisplayNotesComponent,
+    AllNotesComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { DisplayNotesComponent } from './components/display-notes/display-notes.
     MatCardModule,
     MatGridListModule,
     MatMenuModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
     
     
   ],

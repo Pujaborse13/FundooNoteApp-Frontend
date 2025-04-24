@@ -5,6 +5,22 @@
   font-family: 'Arial', sans-serif;
 }
 
+.sidenav .mat-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px; /* Increase the padding */
+}
+
+.sidenav .mat-list-item mat-icon {
+  margin-right: 15px; /* Space between icon and label */
+}
+
+.sidenav .mat-list-item span {
+  margin-left: 16px; /* Space between label and button */
+}
+
+
 .header {
   position: sticky;
   top: 0;

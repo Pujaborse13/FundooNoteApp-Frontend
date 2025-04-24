@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../http-service/http.service';
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -7,17 +8,38 @@ import { HttpService } from '../http-service/http.service';
 })
 export class NoteService {
 
-  constructor(private http :HttpService) { }
+  token : any;
+  constructor(private http :HttpService) {
+    this.token = localStorage.getItem('Token');
+    console.log(this.token);
+
+   }
+
 
 
   createNote(payload: any)
   {
-    return this.http.postCreateNoteApi('/createNote',payload);
+    let httpOption = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${this.token}`,
+      }),
+    };
+    return this.http.postApi('/createNote',payload, httpOption.headers);
   }
 
-
   
+  getAllNotes()
+  {
+    let httpOption = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+       'Authorization': `Bearer ${this.token}`,
+      }),
+    };
+    return this.http.getApi('/getAllNotesById',httpOption.headers);
 
+  }
 
 
 }

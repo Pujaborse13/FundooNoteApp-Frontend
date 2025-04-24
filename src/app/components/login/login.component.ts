@@ -53,7 +53,7 @@ export class LoginComponent {
 
                   console.log('Login Success:', result);  
 
-                  localStorage.setItem('token', result.data);
+                  localStorage.setItem('Token', result.data);
                   // const token = localStorage.getItem('token');
                   //console.log('Token:',token);
                   //this.router.navigateByUrl('dashboard/login')

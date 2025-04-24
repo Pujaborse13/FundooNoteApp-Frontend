@@ -9,27 +9,51 @@ export class HttpService {
 
   constructor(private http: HttpClient) {}
 
-  getHeader() {
-    const token = localStorage.getItem('token');
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-  }
+  // getHeader() {
+  //   const token = localStorage.getItem('token');
+  //   return new HttpHeaders({
+  //     Authorization: `Bearer ${token}`
+  //   });
+  // }
 
-  getApi(endpoint: string, headers: HttpHeaders = this.getHeader()) {
-    return this.http.get(`${this.BASE_URL}${endpoint}`, { headers });
-  }
+
+  // getHeader() {
+  //   const header = new HttpHeaders({
+  //     Authorization: localStorage.getItem('authToken') || '',
+  //   });
+  //   return header;
+  // }
+
+
+  
 
   postApi(endpoint: string , payload:any , headers :HttpHeaders = new HttpHeaders())
   {
     return this.http.post(this.BASE_URL + endpoint, payload,{headers});
   }
 
-  postCreateNoteApi(endpoint: string, payload: any) {
-    const headers = this.getHeader();
-    return this.http.post(`${this.BASE_URL}${endpoint}`, payload, { headers });
+  // postCreateNoteApi(endpoint: string, payload: any) {
+  //   const headers = this.getHeader();
+  //   return this.http.post(`${this.BASE_URL}${endpoint}`, payload, { headers });
+  // }
+
+
+  // getApi(endpoint: string, headers: HttpHeaders = this.getHeader()) {
+  //   return this.http.get(`${this.BASE_URL}${endpoint}`, { headers });
+  // }
+
+  getApi(endpoint: string, headers: HttpHeaders = new HttpHeaders()) {
+    return this.http.get(this.BASE_URL + endpoint, { headers });
   }
 
+
+  deleteApi(endpoint: string, payload: any, headers: HttpHeaders = new HttpHeaders() ) {
+    return this.http.delete(this.BASE_URL + endpoint, payload);
+  }
+
+  putApi(endpoint: string, payload: any, headers : HttpHeaders = new HttpHeaders()){
+    return this.http.post(this.BASE_URL +endpoint,payload);
+  }
 
 
 
