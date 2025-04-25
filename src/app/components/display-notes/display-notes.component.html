@@ -1,57 +1,6 @@
-<!-- 
-
-  <div class="grid-container">
-    <div class="note-tile" *ngFor="let note of allNotes">
-      <div class="tile-header">
-        <h3>{{ note.title }}</h3>
-        <button mat-icon-button class="icon-button">
-          <mat-icon fontSet="material-icons-outlined">notifications_none</mat-icon>
-        </button>
-      </div>
-  
-      <div class="tile-body">
-        <p>{{ note.description }}</p>
-      </div>
-  
-      <div class="tile-footer" >
-        <button mat-icon-button class="icon-button">
-          <mat-icon fontSet="material-icons-outlined">palette</mat-icon>
-        </button>
-
-        <button mat-icon-button class="icon-button">
-          <mat-icon fontSet="material-icons-outlined">notifications_none</mat-icon>
-        </button>
-
-        <button mat-icon-button class="icon-button">
-          <mat-icon fontSet="material-icons-outlined">person_add</mat-icon>
-        </button>
-
-        <button mat-icon-button class="icon-button">
-          <mat-icon fontSet="material-icons-outlined">image</mat-icon>
-        </button>
-
-        <button mat-icon-button class="icon-button">
-          <mat-icon fontSet="material-icons-outlined">archive</mat-icon>
-        </button>
-        
-        <button mat-icon-button class="icon-button">
-          <mat-icon fontSet="material-icons-outlined">more_vert</mat-icon>
-        </button>
-
-        <div *ngIf="isColorPickerVisible" class="color-picker">
-          <div class="color-circle" *ngFor="let color of colors"
-               [ngStyle]="{ 'background-color': color }">
-                (click)="selectColor(color)"> 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-   -->
-
-   <div class="grid-container">
-    <div class="note-tile" *ngFor="let note of allNotes" 
-    [ngStyle]="{ 'background-color': note.color || '#fff' }">
+<div class="grid-container">
+    <div class="note-tile" *ngFor="let note of allNotes" [ngStyle]="{ 'background-color': note.color || '#ffffff' }">
+      
       <div class="tile-header">
         <h3>{{ note.title }}</h3>
         <button mat-icon-button class="icon-button pin-button">
@@ -64,7 +13,7 @@
       </div>
   
       <div class="tile-footer">
-        <button mat-icon-button class="icon-button">
+        <button mat-icon-button class="icon-button" (click)="toggleColorPicker(note, $event)">
           <mat-icon fontSet="material-icons-outlined">palette</mat-icon>
         </button>
         <button mat-icon-button class="icon-button">
@@ -82,7 +31,18 @@
         <button mat-icon-button class="icon-button">
           <mat-icon fontSet="material-icons-outlined">more_vert</mat-icon>
         </button>
+  
+        <!-- Color picker -->
+        <div *ngIf="note.showColorPicker" class="color-picker">
+          <div
+            class="color-circle"
+            *ngFor="let color of colors"
+            [ngStyle]="{ 'background-color': color }"
+            (click)="selectColor(note, color)">
+          </div>
+        </div>
       </div>
+  
     </div>
   </div>
   

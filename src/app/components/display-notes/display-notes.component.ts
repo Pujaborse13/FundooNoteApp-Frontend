@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { NoteService } from 'src/app/services/note/note.service';
 
 interface Note {
-  id : number;
   title: string;
   description: string;
-  color?:string;
-  pinned?:boolean;
-  showColorPicker?:boolean;
+  color:string;
+  showColorPicker :boolean;
 }
 
 @Component({
@@ -19,7 +16,7 @@ interface Note {
 
 export class DisplayNotesComponent implements OnInit{
 
-  allNotes: any[] = [];
+  allNotes: Note[] = [];
   isColorPickerVisible: boolean = false;
   
   colors: string[] = [
@@ -36,8 +33,9 @@ export class DisplayNotesComponent implements OnInit{
   getNotes() {
     this.noteService.getAllNotes().subscribe({
       next: (res: any) => {
+
         console.log("API response:", res);
-        this.allNotes = res.data || res;
+        this.allNotes = res.data ;
       },
 
       error: (err) => {
@@ -46,9 +44,9 @@ export class DisplayNotesComponent implements OnInit{
     });
   }
 
-  toggleColorPicker(event: MouseEvent) {
+  toggleColorPicker(note : Note , event: MouseEvent) {
     event.stopPropagation();  // Prevent click from propagating to document
-    this.isColorPickerVisible = !this.isColorPickerVisible;
+    note.showColorPicker = !note.showColorPicker;
   }
 
   // Select color for the note

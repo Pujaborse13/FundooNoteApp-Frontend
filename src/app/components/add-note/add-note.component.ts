@@ -90,7 +90,7 @@ export class AddNoteComponent implements OnInit {
     if (title || content) {
       const payload = {
         title: title,
-        content: content,
+        description: content,
         color: this.note.color,
         //isPinned: this.note.isPinned
       };

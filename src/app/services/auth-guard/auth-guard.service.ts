@@ -9,7 +9,7 @@ export class AuthGuardService {
   constructor(private router: Router) {}
 
   canActivate(): boolean {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('Token');
     
     if (token) {
       return true;

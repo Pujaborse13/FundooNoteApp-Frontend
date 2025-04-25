@@ -24,8 +24,7 @@ import { AddNoteComponent } from './components/add-note/add-note.component';
 import { FormsModule } from '@angular/forms';
 import { DisplayNotesComponent } from './components/display-notes/display-notes.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { AllNotesComponent } from './all-notes/all-notes.component';
-
+import { AllNotesComponent } from './components/all-notes/all-notes.component';
 
 
 
@@ -59,8 +58,7 @@ import { AllNotesComponent } from './all-notes/all-notes.component';
     MatMenuModule,
     FormsModule,
     MatProgressSpinnerModule
-    
-    
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

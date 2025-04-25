@@ -13,7 +13,7 @@ import { AllNotesComponent } from './components/all-notes/all-notes.component';
 
 const routes: Routes = [
  
-  { path:'register', component: RegisterComponent },
+  { path:'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }, //Path is empty Redirects to login
  
