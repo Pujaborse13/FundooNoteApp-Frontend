@@ -16,7 +16,7 @@ export class AddNoteComponent implements OnInit {
 
   isExpanded: boolean = false;
   isColorPickerVisible: boolean = false;
-  noteForm!: FormGroup;
+  noteForm!: FormGroup; // ! ensure it will get value 
 
   note = {
     title: '',
@@ -30,7 +30,7 @@ export class AddNoteComponent implements OnInit {
     '#DCEDC8', '#EDE7F6', '#FFCDD2', '#FFF3E0', '#F5F5F5', '#E0F7FA'
   ];
 
-  @ViewChild('noteCard', { static: true }) noteCard!: ElementRef;
+  @ViewChild('noteCard', { static: true }) noteCard!: ElementRef; //is a non-null assertion
   @Output() noteAdded = new EventEmitter<any>();
 
 
@@ -40,18 +40,15 @@ export class AddNoteComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {   // Ensuring cleanup on destroy
     this.noteForm = this.fb.group({
       title: ['', [Validators.maxLength(100)]],
       content: ['', [Validators.maxLength(500)]]
     });
   }
 
-  // ngOnDestroy(): void {
-  //   // Ensuring cleanup on destroy
-  // }
 
-  // Open the form and listen for clicks outside
+//
   toggleForm(event?: MouseEvent) {
     this.isExpanded = true;
     event?.stopPropagation(); // Prevent event from propagating to the document
@@ -61,6 +58,7 @@ export class AddNoteComponent implements OnInit {
   // Detect clicks outside the component and close the note
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent) {
+
   const clickedInside = this.noteCard?.nativeElement.contains(event.target);
   if (!clickedInside && this.isExpanded) {
     this.resetNote(); // Collapse without saving
@@ -71,13 +69,13 @@ export class AddNoteComponent implements OnInit {
   // Toggle color picker visibility
   toggleColorPicker(event: MouseEvent) {
     event.stopPropagation();  // Prevent click from propagating to document
-    this.isColorPickerVisible = !this.isColorPickerVisible;
+    this.isColorPickerVisible = !this.isColorPickerVisible; 
   }
 
   // Select color for the note
   selectColor(color: string) {
     this.note.color = color;
-    this.isColorPickerVisible = false;
+    this.isColorPickerVisible = false; 
   }
 
   // Close the note
@@ -92,17 +90,18 @@ export class AddNoteComponent implements OnInit {
         title: title,
         description: content,
         color: this.note.color,
-        //isPinned: this.note.isPinned
       };
-
       console.log('Payload:', payload);
   
-      this.noteService.createNote(payload).subscribe({
+
+      
+      this.noteService.createNote(payload).subscribe({ 
         next: (response: any) => {
           this.snackBar.open('Note saved successfully!', 'Close', {
             duration: 3000,
             panelClass: ['success-snackbar']
           });
+          
           this.noteAdded.emit(response); // Emit if parent wants to refresh list
           this.resetNote(); // Reset after successful add
         },

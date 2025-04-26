@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoteService } from 'src/app/services/note/note.service';
 
 interface Note {
+  noteId: number
   title: string;
   description: string;
   color:string;
   showColorPicker :boolean;
+  isArchive: boolean;
 }
 
 @Component({
@@ -24,10 +27,10 @@ export class DisplayNotesComponent implements OnInit{
     '#DCEDC8', '#EDE7F6', '#FFCDD2', '#FFF3E0', '#F5F5F5', '#E0F7FA'
   ];
 
-  constructor(private noteService: NoteService) {}
+  constructor(private noteService: NoteService , private snackBar :MatSnackBar) {}
 
   ngOnInit() {
-    this.getNotes();
+    this.getNotes(); //display notes while loading 
   }
 
   getNotes() {
@@ -55,5 +58,30 @@ export class DisplayNotesComponent implements OnInit{
     note.showColorPicker = false;
   }
  
+
+
+  onArchiveNote(noteId: number)
+  {
+    this.noteService.archiveNote(noteId).subscribe({
+          next:(res :any) =>{
+            console.log("Note archive sucessfully", res);
+            this.snackBar.open('Note archived successfully!', 'Close', {
+              duration: 3000,
+              
+          })
+            this.getNotes(); //referesh notes
+        },
+          error:(err:any) =>{
+            console.error('error!  cant acrchive note')
+            this.snackBar.open('Error archiving note. Please try again.', 'Close', {
+              duration: 3000,
+             
+            });
+
+          }
+        });
+
+
+    }
 
 }

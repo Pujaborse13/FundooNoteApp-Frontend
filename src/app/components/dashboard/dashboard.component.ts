@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NoteService } from 'src/app/services/note/note.service';
 
 
 @Component({
@@ -17,11 +18,14 @@ export class DashboardComponent {
       this.isSidenavExpanded = !this.isSidenavExpanded;
     }
 
-    selectedItem: string = 'notes';      selectItem(item: string): void {
+
+    selectedItem: string = 'notes';     
+     selectItem(item: string): void {
        this.selectedItem = item;
      }
 
 
+     //logout user / remove token
      logout()
       {
         localStorage.removeItem('token');
@@ -29,6 +33,10 @@ export class DashboardComponent {
 
         this.router.navigate(['/login']);
       }
+
+     
+      
+
 
 
 

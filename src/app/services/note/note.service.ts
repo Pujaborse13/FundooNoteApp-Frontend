@@ -9,7 +9,8 @@ import { HttpHeaders } from '@angular/common/http';
 export class NoteService {
 
   token : any;
-  constructor(private http :HttpService) {
+  constructor(private http :HttpService) 
+  {
     this.token = localStorage.getItem('Token');
     console.log(this.token);
 
@@ -35,10 +36,50 @@ export class NoteService {
       headers: new HttpHeaders({
         'Content-type': 'application/json',
        'Authorization': `Bearer ${this.token}`,
-      }),
+      }), 
     };
     return this.http.getApi('/getAllNotesById',httpOption.headers);
 
+  }
+
+
+  // archiveNote(payload : any)
+  // {
+  //   let httpOption = {
+  //     headers : new HttpHeaders({
+  //       'Content-type' : 'application/json',
+  //       'Authorization' : `Bearer ${this.token}`,
+  //     }),
+  //   };
+  //   return this.http.putApi('/archiveNote',payload.id,httpOption.headers);
+
+
+  // }
+
+
+  // archiveNote(noteId: number)
+  // {
+  //   let httpOption = {
+  //     headers : new HttpHeaders({
+  //       'Content-type' : 'application/json',
+  //       'Authorization' : `Bearer ${this.token}`,
+  //     }),
+  //   };
+  //   return this.http.putApi('/archiveNote',noteId,httpOption.headers);
+
+
+  // }
+
+  archiveNote(noteId: number) {
+    const httpOption = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }),
+    };
+    console.log("Header",httpOption);
+    return this.http.putApi('/archiveNote',noteId, httpOption.headers);
+  
   }
 
 
