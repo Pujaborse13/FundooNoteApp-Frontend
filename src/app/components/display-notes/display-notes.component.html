@@ -1,6 +1,8 @@
 <div class="grid-container">
-    <div class="note-tile" *ngFor="let note of allNotes" [ngStyle]="{ 'background-color': note.color || '#ffffff' }">
-      
+    
+  <div class="note-tile" *ngFor="let note of allNotes" [ngStyle]="{ 'background-color': note.color || '#ffffff' }">
+    <!-- <div class="note-tile" *ngFor="let note of notes" [ngStyle]="{ 'background-color': note.color || '#ffffff' }"> -->
+
       <div class="tile-header">
         <h3>{{ note.title }}</h3>
         <button mat-icon-button class="icon-button pin-button">
@@ -25,15 +27,12 @@
         <button mat-icon-button class="icon-button">
           <mat-icon fontSet="material-icons-outlined">image</mat-icon>
         </button>
-        <!-- <button mat-icon-button class="icon-button">
-          <mat-icon fontSet="material-icons-outlined">archive</mat-icon>
-        </button> -->
 
-        <button mat-icon-button class="icon-button" (click)="onArchiveNote(note.noteId)">
-          <mat-icon fontSet="material-icons-outlined">archive</mat-icon>
+        <button mat-icon-button class="icon-button" (click)="onArchiveNote(note)" >
+          <mat-icon fontSet="material-icons-outlined" >
+            {{ note.isArchive ? 'unarchive' : 'archive' }}</mat-icon>
         </button>
         
-
         <button mat-icon-button class="icon-button">
           <mat-icon fontSet="material-icons-outlined">more_vert</mat-icon>
         </button>

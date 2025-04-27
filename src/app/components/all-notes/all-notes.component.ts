@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
+import { DisplayNotesComponent } from '../display-notes/display-notes.component';
 
 @Component({
   selector: 'app-all-notes',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./all-notes.component.scss']
 })
 export class AllNotesComponent {
+
+  @ViewChild(DisplayNotesComponent) displayNoteComp !: DisplayNotesComponent;
+
+  @Input() showArchived: boolean = false; 
+
+  onNoteAdded(newNote : any)
+  {
+    if(this.displayNoteComp)
+    {
+      this.displayNoteComp.getNotes();
+    }
+  }
 
 }

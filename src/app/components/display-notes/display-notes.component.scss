@@ -46,8 +46,8 @@
 
 .icon-button {
   font-size: 18px;
-  width: 32px;
-  height: 32px;
+  width: 35px;
+  height: 35px;
 
   mat-icon {
     font-size: 20px;
@@ -55,16 +55,16 @@
   }
 }
 
-.color-picker {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-}
+// .color-picker {
+//   display: flex;
+//   flex-wrap: wrap;
+//   gap: 6px;
+//   margin-top: 8px;
+// }
 
 .color-circle {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   cursor: pointer;
   border: 1px solid #ccc;
@@ -75,3 +75,40 @@
     border-color: #888;
   }
 }
+
+
+
+
+.tile-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* Add this */
+}
+
+.color-picker {
+  width: max-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+
+  position: absolute;
+  bottom: 28px;
+  left: 43%; /* Adjust here */
+  transform: translateX(-43%); /* Match transform to same value */
+
+  background: #fff;
+  border: 1px solid #211717;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  overflow-x: auto;
+}
+
+
+
+
+

@@ -141,3 +141,12 @@ button[matMenuTriggerFor] {
 }
 
 
+.sidenav-list button {
+  display: flex;
+  align-items: center;
+}
+
+.sidenav-label {
+  margin-left: 12px;  /* Adjust spacing as you like */
+  font-size: 16px;    /* Optional: make text look better */
+}

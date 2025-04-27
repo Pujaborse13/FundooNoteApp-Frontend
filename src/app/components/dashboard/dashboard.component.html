@@ -59,35 +59,38 @@
   <mat-sidenav #sidenav mode="side" [opened]="true" class="sidenav" [class.collapsed]="!isSidenavExpanded">
     
     <mat-nav-list class="sidenav-list">
-      <button mat-list-item>
+
+      <button mat-list-item [ngClass]= "{ 'active': activeItem === 'Notes'}" (click)="setActive('Notes')"  >
         <mat-icon fontSet="material-icons-outlined">lightbulb</mat-icon>
-        <span *ngIf="isSidenavExpanded">Notes</span>
+        <span class="sidenav-label" *ngIf="isSidenavExpanded">Notes</span>
       </button>
       
-      <button mat-list-item>
+      <button mat-list-item [ngClass]="{ 'active': activeItem === 'Reminders' }" >
         <mat-icon fontSet="material-icons-outlined">notifications</mat-icon>
-        <span *ngIf="isSidenavExpanded">Reminders</span>
+        <span class="sidenav-label" *ngIf="isSidenavExpanded">Reminders</span>
       </button>
       
-      <button mat-list-item>
+      <button mat-list-item ="{ 'active': activeItem === 'Labels' }">
         <mat-icon fontSet="material-icons-outlined">label</mat-icon>
-        <span *ngIf="isSidenavExpanded">Labels</span>
+        <span class="sidenav-label" *ngIf="isSidenavExpanded">Labels</span>
       </button>
       
-      <button mat-list-item>
+                            <!-- navigate to archive  -->
+      <button mat-list-item ="{ 'active': activeItem === 'Archive'}" (click)="setActive('Archive')">
         <mat-icon fontSet="material-icons-outlined">archive</mat-icon>
-        <span *ngIf="isSidenavExpanded">Archive</span>
+        <span class="sidenav-label" *ngIf="isSidenavExpanded">Archive</span>
       </button>
       
-      <button mat-list-item>
+      <button mat-list-item ="{ 'active': activeItem === 'Trash' }">
         <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
-        <span *ngIf="isSidenavExpanded">Trash</span>
+        <span class="sidenav-label" *ngIf="isSidenavExpanded">Trash</span>
       </button>
     
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <router-outlet></router-outlet>
+    <app-all-notes [showArchived]="showArchived"></app-all-notes>
+    <!-- <router-outlet></router-outlet> -->
   </mat-sidenav-content>
 </mat-sidenav-container>
