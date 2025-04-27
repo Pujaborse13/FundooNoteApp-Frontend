@@ -26,6 +26,7 @@ import { DisplayNotesComponent } from './components/display-notes/display-notes.
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AllNotesComponent } from './components/all-notes/all-notes.component';
 import { ArchiveNotesComponent } from './components/archive-notes/archive-notes.component';
+import { TrashNotesComponent } from './components/trash-notes/trash-notes.component';
 
 
 
@@ -38,7 +39,8 @@ import { ArchiveNotesComponent } from './components/archive-notes/archive-notes.
     AddNoteComponent,
     DisplayNotesComponent,
     AllNotesComponent,
-    ArchiveNotesComponent
+    ArchiveNotesComponent,
+    TrashNotesComponent
   ],
   imports: [
     BrowserModule,

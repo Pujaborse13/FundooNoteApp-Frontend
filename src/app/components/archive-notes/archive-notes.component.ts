@@ -11,13 +11,12 @@ export class ArchiveNotesComponent {
 
   filteredNotes: any[] = [];
 
-  constructor(private route : ActivatedRoute, private noteService :NoteService){}
+  constructor(private noteService :NoteService){}
 
   ngOnInit(): void
   {
    
-
-    this.noteService.getAllNotes().subscribe((response:any) =>
+   this.noteService.getAllNotes().subscribe((response:any) =>
     {
       this.filteredNotes = response.data.filter((note: any) => note.isArchive === true);
 

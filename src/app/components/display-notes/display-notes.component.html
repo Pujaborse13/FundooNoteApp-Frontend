@@ -32,10 +32,54 @@
           <mat-icon fontSet="material-icons-outlined" >
             {{ note.isArchive ? 'unarchive' : 'archive' }}</mat-icon>
         </button>
+
+        <!-- <button mat-icon-button class="icon-button" (click)="OnTrashNote(note)">
+          <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
+        </button> 
         
-        <button mat-icon-button class="icon-button">
+         <button mat-icon-button class="icon-button">
+          <mat-icon fontSet="material-icons-outlined">more_vert</mat-icon>
+        </button> -->
+
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="icon-button">
           <mat-icon fontSet="material-icons-outlined">more_vert</mat-icon>
         </button>
+        
+        <mat-menu #menu="matMenu" class="custom-menu">
+          <div class="menu-content">
+            <button mat-menu-item (click)="OnTrashNote(note)">
+              <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
+              <span>Delete Note</span>
+            </button>
+        
+            <button mat-menu-item>
+              <mat-icon fontSet="material-icons-outlined">label</mat-icon><span>Add Label</span>
+            </button>
+        
+            <button mat-menu-item>
+              <mat-icon fontSet="material-icons-outlined">draw</mat-icon><span>Add Drawing</span>
+            </button>
+        
+            <button mat-menu-item>
+              <mat-icon fontSet="material-icons-outlined">content_copy</mat-icon><span>Make a Copy</span>
+            </button>
+        
+            <button mat-menu-item>
+              <mat-icon fontSet="material-icons-outlined">check_box</mat-icon><span>Show Checkboxes</span>
+            </button>
+        
+            <button mat-menu-item>
+              <mat-icon fontSet="material-icons-outlined">cloud_upload</mat-icon><span>Copy to Google Docs</span>
+            </button>
+        
+            <button mat-menu-item>
+              <mat-icon fontSet="material-icons-outlined">history</mat-icon><span>Version History</span>
+            </button>
+          </div>
+        </mat-menu>
+        
+        
   
         <!-- Color picker -->
         <div *ngIf="note.showColorPicker" class="color-picker">

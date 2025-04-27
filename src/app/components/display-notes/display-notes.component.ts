@@ -10,6 +10,7 @@ interface Note {
   color:string;
   showColorPicker :boolean;
   isArchive: boolean;
+  isTrash : boolean;
 }
 
 @Component({
@@ -20,13 +21,15 @@ interface Note {
 
 export class DisplayNotesComponent implements OnInit,OnChanges{
 
-  allNotes: Note[] = [];
+  allNotes: Note[] = []; 
+
   isColorPickerVisible: boolean = false;
 
   //recived value from parent
   @Input() showArchived : boolean= false //Input property to determine whether to archived or non-archived notes
-  // @Input() notes :Note[] =[];
   
+  @Input() showTrashed : boolean = false
+
   colors: string[] = [
     '#FFF9C4', '#FFE0B2', '#E1BEE7', '#B2EBF2', '#B3E5FC', '#F8BBD0',
     '#DCEDC8', '#EDE7F6', '#FFCDD2', '#FFF3E0', '#F5F5F5', '#E0F7FA'
@@ -57,8 +60,8 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
         console.log("API response:", res);
         this.allNotes = res.data ;
 
-        this.allNotes = Array.isArray(res) ? res: res.data;
-        console.log(this.allNotes);
+        // this.allNotes = Array.isArray(res) ? res: res.data;
+        // console.log(this.allNotes);
 
 
         if(this.showArchived)
@@ -66,14 +69,21 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
           this.allNotes= this.allNotes.filter((note : Note ) => note.isArchive);
 
         }
+        else if(this.showTrashed)
+        {
+          this.allNotes = this.allNotes.filter((note : Note ) => note.isTrash);
+        }
+        else
+        {
+          this.allNotes = this.allNotes.filter((note: Note) => !note.isArchive && !note.isTrash); // Show regular notes
          // Filter notes based on the showArchived property
-          this.allNotes = this.allNotes.filter((note: Note) => this.showArchived ? note.isArchive : !note.isArchive);
-
+          //this.allNotes = this.allNotes.filter((note: Note) => this.showArchived ? note.isArchive : !note.isArchive);
+        }
 
       },
 
       error: (err) => {
-        this.snackBar.open('Getting all notes failed !!!!', 'Close', {
+        this.snackBar.open(' Error fetching notes !', 'Close', {
           duration: 3000,
           panelClass: ['error-snackbar']});
 
@@ -110,8 +120,6 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
             notes.isArchive = true;
           
         },
-
-
           error:(err:any) =>{
             console.error('error!  cant acrchive note')
             this.snackBar.open('Error archiving note. Please try again.', 'Close', {
@@ -123,6 +131,28 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
         });
 
 
-    }
+  }
+
+
+  OnTrashNote(notes:Note)
+  {
+    this.noteService.trashNote(notes.noteId).subscribe({
+      next:(res:any) =>{
+        console.log("Note Trash  sucessfully", res);
+        this.snackBar.open('Note Trash !', 'Undo', { duration: 3000,});
+        this.getNotes(); // Refresh the notes after trashing
+        notes.isTrash = true; // Update the note status to trashed
+      
+      },
+      error: (err: any) => {
+        console.error('Error! Unable to trash note');
+        this.snackBar.open('Error trashing note. Please try again.', 'Close', {
+          duration: 3000,
+        });
+      }
+
+    });
+    
+  }
 
 }

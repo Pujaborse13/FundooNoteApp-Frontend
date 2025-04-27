@@ -110,5 +110,19 @@
 
 
 
+.custom-menu .menu-content {
+  padding: 0; /* Remove extra padding */
+  min-width: 130px; /* Optional: Adjust width */
+}
 
+.custom-menu .mat-menu-item {
+  min-height: 20px; /* Reduce item height even more */
+  font-size: 8px;  /* Small font */
+  padding: 2px 10px; /* Less padding vertically */
+  line-height: 0.8; /* Tight line height */
+}
 
+.custom-menu .mat-menu-item mat-icon {
+  font-size: 8px; /* Smaller icon size */
+  margin-right: 5px;
+}

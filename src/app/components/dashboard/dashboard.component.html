@@ -70,18 +70,18 @@
         <span class="sidenav-label" *ngIf="isSidenavExpanded">Reminders</span>
       </button>
       
-      <button mat-list-item ="{ 'active': activeItem === 'Labels' }">
+      <button mat-list-item [ngClass]="{ 'active': activeItem === 'Labels' }">
         <mat-icon fontSet="material-icons-outlined">label</mat-icon>
         <span class="sidenav-label" *ngIf="isSidenavExpanded">Labels</span>
       </button>
       
                             <!-- navigate to archive  -->
-      <button mat-list-item ="{ 'active': activeItem === 'Archive'}" (click)="setActive('Archive')">
+      <button mat-list-item [ngClass]="{ 'active': activeItem === 'Archive'}" (click)="setActive('Archive')">
         <mat-icon fontSet="material-icons-outlined">archive</mat-icon>
         <span class="sidenav-label" *ngIf="isSidenavExpanded">Archive</span>
       </button>
       
-      <button mat-list-item ="{ 'active': activeItem === 'Trash' }">
+      <button mat-list-item [ngClass] ="{ 'active': activeItem === 'Trash' }" (click)="setActive('Trash')">
         <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
         <span class="sidenav-label" *ngIf="isSidenavExpanded">Trash</span>
       </button>

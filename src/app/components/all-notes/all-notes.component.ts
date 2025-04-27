@@ -12,6 +12,10 @@ export class AllNotesComponent {
 
   @Input() showArchived: boolean = false; 
 
+  @Input() showTrashed :boolean = false;
+
+
+
   onNoteAdded(newNote : any)
   {
     if(this.displayNoteComp)

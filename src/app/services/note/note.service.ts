@@ -17,7 +17,6 @@ export class NoteService {
    }
 
 
-
   createNote(payload: any)
   {
     let httpOption = {
@@ -57,19 +56,6 @@ export class NoteService {
   // }
 
 
-  // archiveNote(noteId: number)
-  // {
-  //   let httpOption = {
-  //     headers : new HttpHeaders({
-  //       'Content-type' : 'application/json',
-  //       'Authorization' : `Bearer ${this.token}`,
-  //     }),
-  //   };
-  //   return this.http.putApi('/archiveNote',noteId,httpOption.headers);
-
-
-  // }
-
   archiveNote(noteId: number) {
     const httpOption = {
       headers: new HttpHeaders({
@@ -80,6 +66,21 @@ export class NoteService {
     console.log("Header",httpOption);
     return this.http.putApi('/archiveNote',noteId, httpOption.headers);
   
+  }
+
+
+
+  trashNote(noteId : number)
+  {
+    const httpOption = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }),
+    };
+    console.log("Header",httpOption);
+    return this.http.putApi('/trashNote',noteId, httpOption.headers);
+
   }
 
 
