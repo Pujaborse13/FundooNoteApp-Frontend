@@ -16,8 +16,8 @@ export class AllNotesComponent {
 
 
 
-  onNoteAdded(newNote : any)
-  {
+  //onNoteAdded(newNote : any)
+  onNoteAdded(){
     if(this.displayNoteComp)
     {
       this.displayNoteComp.getNotes();

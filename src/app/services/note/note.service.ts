@@ -83,5 +83,20 @@ export class NoteService {
 
   }
 
+  deleteNote(noteId: number)
+  {
+    const httpOption = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }),
+    };
+    console.log("Header",httpOption);
+    return this.http.deleteApi(`/deleteNote/${noteId}`,httpOption.headers);
+  }
 
+  
 }
+
+
+

@@ -54,6 +54,11 @@ export class DashboardComponent {
          this.showTrashed = true; // Show trashed notes
          this.showArchived = false; // Hide archived notes
       }
+      else if (item === 'Note') 
+        {
+           this.showTrashed = false; // Show trashed notes
+           this.showArchived = false; // Hide archived notes
+        }
       else
       {  
         this.showArchived = false; // Show regular notes when Notes tab is clicked

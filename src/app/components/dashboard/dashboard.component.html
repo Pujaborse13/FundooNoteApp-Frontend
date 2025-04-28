@@ -89,8 +89,18 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content>
-    <app-all-notes [showArchived]="showArchived"></app-all-notes>
-    <!-- <router-outlet></router-outlet> -->
+  <!-- <mat-sidenav-content>
+    <app-all-notes [showArchived]="showArchived" [showTrashed] ="showTrashed"></app-all-notes>
+     <router-outlet></router-outlet> 
+  </mat-sidenav-content> -->
+
+  <!-- src/app/components/dashboard/dashboard.component.html -->
+<mat-sidenav-content>
+  <!-- -  <app-all-notes [showArchived]="showArchived"></app-all-notes> -->
+    <app-all-notes
+       [showArchived]="showArchived"
+       [showTrashed] ="showTrashed">
+    </app-all-notes>
   </mat-sidenav-content>
+  
 </mat-sidenav-container>

@@ -43,54 +43,72 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
    this.getNotes(); //display notes while loading 
     }
     
-    ngOnChanges() 
-    {
+    ngOnChanges() {
       // When showArchived changes, reload the notes
       this.getNotes();
     }
       
-
-
   
-  getNotes()
-  {
+  // getNotes()
+  // {
+  //   this.noteService.getAllNotes().subscribe({
+  //     next: (res: any) => {
+
+  //       console.log("API response:", res);
+  //       this.allNotes = res.data ;
+
+  //       if(this.showArchived)
+  //       {
+  //         this.allNotes= this.allNotes.filter((note : Note ) => note.isArchive && !note.isTrash);
+          
+
+  //       }
+  //       else if(this.showTrashed)
+  //       {
+  //         this.allNotes = this.allNotes.filter((note : Note ) => note.isTrash);
+  //       }
+  //       else
+  //       {
+  //         this.allNotes = this.allNotes.filter((note: Note) => !note.isArchive && !note.isTrash); // Show regular notes
+  //        // Filter notes based on the showArchived property
+  //         //this.allNotes = this.allNotes.filter((note: Note) => this.showArchived ? note.isArchive : !note.isArchive);
+  //       }
+
+  //     },
+
+  //     error: (err) => {
+  //       this.snackBar.open(' Error fetching notes !', 'Close', {duration: 3000});
+  //       //console.error("Error fetching notes", err);
+  //     }
+  //   });
+
+  // }
+  
+  getNotes() {
     this.noteService.getAllNotes().subscribe({
       next: (res: any) => {
-
         console.log("API response:", res);
-        this.allNotes = res.data ;
-
-        // this.allNotes = Array.isArray(res) ? res: res.data;
-        // console.log(this.allNotes);
-
-
-        if(this.showArchived)
-        {
-          this.allNotes= this.allNotes.filter((note : Note ) => note.isArchive);
-
+  
+        let notes = res.data; // Temporary variable to hold all notes
+  
+        if (this.showArchived) {
+          notes = notes.filter((note: Note) => note.isArchive && !note.isTrash);
+        } 
+        else if (this.showTrashed) {
+          notes = notes.filter((note: Note) => note.isTrash);
+        } 
+        else {
+          notes = notes.filter((note: Note) => !note.isArchive && !note.isTrash);
         }
-        else if(this.showTrashed)
-        {
-          this.allNotes = this.allNotes.filter((note : Note ) => note.isTrash);
-        }
-        else
-        {
-          this.allNotes = this.allNotes.filter((note: Note) => !note.isArchive && !note.isTrash); // Show regular notes
-         // Filter notes based on the showArchived property
-          //this.allNotes = this.allNotes.filter((note: Note) => this.showArchived ? note.isArchive : !note.isArchive);
-        }
-
+  
+        this.allNotes = notes; // Now assign after filtering
       },
-
+  
       error: (err) => {
-        this.snackBar.open(' Error fetching notes !', 'Close', {
-          duration: 3000,
-          panelClass: ['error-snackbar']});
-
-        //console.error("Error fetching notes", err);
+        console.error("Error fetching notes", err);
+        this.snackBar.open('Error fetching notes!', 'Close', { duration: 3000 });
       }
     });
-
   }
   
 
@@ -107,17 +125,17 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
  
 
    // Archive a note by noteId
-  onArchiveNote(notes: Note)
+  onArchiveNote(note: Note)
   {
-    this.noteService.archiveNote(notes.noteId).subscribe({
+    this.noteService.archiveNote(note.noteId).subscribe({
           next:(res :any) =>{
             console.log("Note archive sucessfully", res);
             this.snackBar.open('Note archived successfully!', 'Close', { duration: 3000,});
             
             this.getNotes();//to refresh the notes after archiving
           
-      // // Update the notes list to reflect the archive status change
-            notes.isArchive = true;
+           // Update the notes list to reflect the archive status change
+            note.isArchive = true;
           
         },
           error:(err:any) =>{
@@ -129,30 +147,94 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
 
           }
         });
-
-
   }
 
 
-  OnTrashNote(notes:Note)
+  OnTrashNote(note:Note)
   {
-    this.noteService.trashNote(notes.noteId).subscribe({
-      next:(res:any) =>{
-        console.log("Note Trash  sucessfully", res);
-        this.snackBar.open('Note Trash !', 'Undo', { duration: 3000,});
-        this.getNotes(); // Refresh the notes after trashing
-        notes.isTrash = true; // Update the note status to trashed
+     const originalIsTrash = note.isTrash; //First, backup the current note state
+      // note.isTrash = true; // Immediately move the note to trash
+
+      this.noteService.trashNote(note.noteId).subscribe({
+
+        next:(res:any) =>{
+
+          console.log("Note Trash  sucessfully", res);
+          const snackBarRef = this.snackBar.open('Note moved to trash!', 'Undo', { duration: 5000 });
+
+            //  clicks on "Undo"
+            snackBarRef.onAction().subscribe(() => {
+
+               // Undo the trash operation
+                note.isTrash = originalIsTrash; // Revert back the isTrash value
       
+                this.noteService.trashNote(note.noteId).subscribe({
+
+                  next: (undoRes: any) =>{
+                  console.log('Undo successful', undoRes);
+
+                  this.getNotes(); // Refresh the notes after trashing
+                  note.isTrash = true;
+                  //notes.isTrash = true; // Update the note status to trashed
+                  },
+                  error: (err: any) => 
+                  {
+                  console.error('Error!  undoing  trash ',err);
+                  this.snackBar.open('Error undoing trash. Please referesh', 'Close', {duration: 3000, });
+                  }
+
+            });
+       });
+       
+       setTimeout(() => {
+        this.getNotes();}, 3000);       
+        //this.getNotes(); // Refresh after trashing
+
+  },
+
+
+  error: (err: any) => {
+    console.error('Error! Unable to trash note');
+    this.snackBar.open('Error trashing note. Please try again.', 'Close', {
+      duration: 3000,});
+    }
+
+  });
+  }
+
+
+  OnDeleteNote(note: Note): void {
+    this.noteService.deleteNote(note.noteId).subscribe({
+      next: (res: any) => {
+        console.log('Note permanently deleted', res);
+        this.snackBar.open('Note permanently deleted!', 'Close', { duration: 3000 });
+        
+        this.allNotes = this.allNotes.filter(n => n.noteId !== note.noteId);
+        //this.getNotes(); // Refresh the notes after deletion
       },
       error: (err: any) => {
-        console.error('Error! Unable to trash note');
-        this.snackBar.open('Error trashing note. Please try again.', 'Close', {
-          duration: 3000,
-        });
+        console.error('Error deleting note', err);
+        this.snackBar.open('Error deleting note. Please try again.', 'Close', { duration: 3000 });
       }
-
     });
-    
   }
+  
+
+  OnRestore(note: Note): void {
+    note.isTrash = false; // Update the local state
+    this.noteService.trashNote(note.noteId).subscribe({
+      next: (res: any) => {
+        console.log('Note restored from trash', res);
+        this.snackBar.open('Note restored!', 'Close', { duration: 3000 });
+        this.getNotes(); // Refresh the notes after restoration
+      },
+      error: (err: any) => {
+        console.error('Error restoring note', err);
+        this.snackBar.open('Error restoring note. Please try again.', 'Close', { duration: 3000 });
+      }
+    });
+  }
+
+
 
 }

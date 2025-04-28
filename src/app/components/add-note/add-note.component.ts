@@ -26,9 +26,10 @@ export class AddNoteComponent implements OnInit {
   };
 
   colors: string[] = [
-    '#FFF9C4', '#FFE0B2', '#E1BEE7', '#B2EBF2', '#B3E5FC', '#F8BBD0',
-    '#DCEDC8', '#EDE7F6', '#FFCDD2', '#FFF3E0', '#F5F5F5', '#E0F7FA'
+    '#D3D3D3','#FFEB99','#B3E5FC','#FFB0B0','#E1BEE7','#C8E6C9',
+    '#F8BBD0','#FFF9C4','#80DEEA','#FF8A80','#D1C4E9', '#A5D6A7', 
   ];
+
 
   @ViewChild('noteCard', { static: true }) noteCard!: ElementRef; //is a non-null assertion
   @Output() noteAdded = new EventEmitter<any>();
@@ -48,7 +49,7 @@ export class AddNoteComponent implements OnInit {
   }
 
 
-//
+
   toggleForm(event?: MouseEvent) {
     this.isExpanded = true;
     event?.stopPropagation(); // Prevent event from propagating to the document
@@ -97,22 +98,19 @@ export class AddNoteComponent implements OnInit {
       
       this.noteService.createNote(payload).subscribe({ 
         next: (response: any) => {
-          this.snackBar.open('Note saved successfully!', 'Close', {
-            duration: 3000,
-            panelClass: ['success-snackbar']
-          });
-          
+          this.snackBar.open('Note saved successfully!', 'Close', {duration: 3000});
           this.noteAdded.emit(response); // Emit if parent wants to refresh list
+         // this.noteAdded.emit(response); // Emit if parent wants to refresh list
+          
           this.resetNote(); // Reset after successful add
         },
-        error: () => {
+         error: () => {
           this.snackBar.open('Error in saving note!', 'Close', {
-            duration: 3000,
-            panelClass: ['error-snackbar']
-          });
+            duration: 3000});
         }
       });
-    } else {
+    } 
+    else {
       this.resetNote(); // Even if no content, just reset form
     }
   }

@@ -13,6 +13,7 @@ export class TrashNotesComponent {
   
     constructor(private noteService :NoteService){}
   
+
     ngOnInit(): void
     {
      

@@ -50,9 +50,28 @@
     </div>
   </ng-container>
 
-  <!-- Collapsed View -->
+  <!-- Collapsed View
   <ng-template #collapsedView>
     <p class="placeholder">Take a note...</p>
+  </ng-template> -->
+
+
+   <!-- Collapsed View -->
+   <ng-template #collapsedView>
+    <div class="collapsed-container">
+      <p class="placeholder">Take a note...</p>
+      <div class="collapsed-icons">
+        <button mat-icon-button>
+          <mat-icon fontSet="material-icons-outlined">check_box</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon fontSet="material-icons-outlined">brush</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon fontSet="material-icons-outlined">image</mat-icon>
+        </button>
+      </div>
+    </div>
   </ng-template>
 
 </div>

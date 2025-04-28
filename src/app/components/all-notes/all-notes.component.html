@@ -1,8 +1,22 @@
 
 <!-- all-notes.component.html -->
 
-<app-add-note></app-add-note>
+<!-- <app-add-note (noteAdded)="onNoteAdded()" ></app-add-note> -->
+<!-- <app-add-note
+   *ngIf="!showArchived && !showTrashed"
+    (noteAdded)="onNoteAdded()">
+ </app-add-note>
 
-<app-display-notes [showArchived] = "showArchived"></app-display-notes>
+<app-display-notes [showArchived] = "showArchived" [showTrashed] = "showTrashed"></app-display-notes> -->
 
-<app-display-notes [showTrashed] = "showTrashed"></app-display-notes>
+<!-- <app-display-notes [showTrashed] = "showTrashed"></app-display-notes> -->
+
+
+<!-- src/app/components/all-notes/all-notes.component.html -->
+<app-add-note
+  *ngIf="!showArchived && !showTrashed"
+  (noteAdded)="onNoteAdded()">
+</app-add-note>
+
+<!-- <app-display-notes [showArchived]="showArchived"></app-display-notes> -->
+<app-display-notes [showArchived]="showArchived"[showTrashed] ="showTrashed"></app-display-notes>
