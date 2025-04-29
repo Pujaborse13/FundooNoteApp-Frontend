@@ -49,68 +49,40 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
     }
       
   
-  // getNotes()
-  // {
-  //   this.noteService.getAllNotes().subscribe({
-  //     next: (res: any) => {
-
-  //       console.log("API response:", res);
-  //       this.allNotes = res.data ;
-
-  //       if(this.showArchived)
-  //       {
-  //         this.allNotes= this.allNotes.filter((note : Note ) => note.isArchive && !note.isTrash);
-          
-
-  //       }
-  //       else if(this.showTrashed)
-  //       {
-  //         this.allNotes = this.allNotes.filter((note : Note ) => note.isTrash);
-  //       }
-  //       else
-  //       {
-  //         this.allNotes = this.allNotes.filter((note: Note) => !note.isArchive && !note.isTrash); // Show regular notes
-  //        // Filter notes based on the showArchived property
-  //         //this.allNotes = this.allNotes.filter((note: Note) => this.showArchived ? note.isArchive : !note.isArchive);
-  //       }
-
-  //     },
-
-  //     error: (err) => {
-  //       this.snackBar.open(' Error fetching notes !', 'Close', {duration: 3000});
-  //       //console.error("Error fetching notes", err);
-  //     }
-  //   });
-
-  // }
-  
-  getNotes() {
+  getNotes()
+  {
     this.noteService.getAllNotes().subscribe({
       next: (res: any) => {
+
         console.log("API response:", res);
-  
-        let notes = res.data; // Temporary variable to hold all notes
-  
-        if (this.showArchived) {
-          notes = notes.filter((note: Note) => note.isArchive && !note.isTrash);
-        } 
-        else if (this.showTrashed) {
-          notes = notes.filter((note: Note) => note.isTrash);
-        } 
-        else {
-          notes = notes.filter((note: Note) => !note.isArchive && !note.isTrash);
+        this.allNotes = res.data ;
+
+        if(this.showArchived)
+        {
+          this.allNotes= this.allNotes.filter((note : Note ) => note.isArchive && !note.isTrash);
+          
         }
-  
-        this.allNotes = notes; // Now assign after filtering
+        else if(this.showTrashed)
+        {
+          this.allNotes = this.allNotes.filter((note : Note ) => note.isTrash);
+        }
+        else
+        {
+          this.allNotes = this.allNotes.filter((note: Note) => !note.isArchive && !note.isTrash); // Show regular notes
+         // Filter notes based on the showArchived property
+          //this.allNotes = this.allNotes.filter((note: Note) => this.showArchived ? note.isArchive : !note.isArchive);
+        }
+
       },
-  
+
       error: (err) => {
-        console.error("Error fetching notes", err);
-        this.snackBar.open('Error fetching notes!', 'Close', { duration: 3000 });
+        this.snackBar.open(' Error fetching notes !', 'Close', {duration: 3000});
+        //console.error("Error fetching notes", err);
       }
     });
+
   }
-  
+    
 
   toggleColorPicker(note : Note , event: MouseEvent) {
     event.stopPropagation();  // Prevent click from propagating to document
@@ -134,8 +106,8 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
             
             this.getNotes();//to refresh the notes after archiving
           
-           // Update the notes list to reflect the archive status change
-            note.isArchive = true;
+           // Update the notes to reflect the archive status change
+            note.isArchive = true; 
           
         },
           error:(err:any) =>{
@@ -156,7 +128,6 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
       // note.isTrash = true; // Immediately move the note to trash
 
       this.noteService.trashNote(note.noteId).subscribe({
-
         next:(res:any) =>{
 
           console.log("Note Trash  sucessfully", res);
@@ -191,7 +162,6 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
         //this.getNotes(); // Refresh after trashing
 
   },
-
 
   error: (err: any) => {
     console.error('Error! Unable to trash note');

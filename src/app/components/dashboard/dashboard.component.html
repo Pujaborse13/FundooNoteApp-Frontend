@@ -6,8 +6,11 @@
       <mat-icon fontSet="material-icons-outlined">menu</mat-icon>
     </button>
 
-    <img src="assets/images/keep.png" alt="logo" class="logo" />
-    <span class="title">FunDoo</span>
+    <img *ngIf="currentTitle === 'FunDoo'" src="assets/images/keep.png" alt="logo" class="logo" />
+    <!-- <img src="assets/images/keep.png" alt="logo" class="logo" /> -->
+    <span class="title">{{ currentTitle }}</span>
+
+    <!-- <span class="title">FunDoo</span>  -->
 
     <span class="spacer"></span>
 
@@ -89,18 +92,13 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <!-- <mat-sidenav-content>
-    <app-all-notes [showArchived]="showArchived" [showTrashed] ="showTrashed"></app-all-notes>
-     <router-outlet></router-outlet> 
-  </mat-sidenav-content> -->
 
-  <!-- src/app/components/dashboard/dashboard.component.html -->
-<mat-sidenav-content>
-  <!-- -  <app-all-notes [showArchived]="showArchived"></app-all-notes> -->
-    <app-all-notes
-       [showArchived]="showArchived"
-       [showTrashed] ="showTrashed">
-    </app-all-notes>
+
+  <mat-sidenav-content>
+    <app-all-notes 
+        [showArchived]="showArchived" 
+        [showTrashed] ="showTrashed"></app-all-notes>
+     <!-- <router-outlet></router-outlet>  -->
   </mat-sidenav-content>
+
   
-</mat-sidenav-container>
