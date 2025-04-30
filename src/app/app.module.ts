@@ -31,6 +31,10 @@ import { UpdateNotesComponent } from './components/update-notes/update-notes.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CollaboratorComponent } from './components/collaborator/collaborator.component';
+import { SetReminderComponent } from './components/set-reminder/set-reminder.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 
 
@@ -47,7 +51,8 @@ import { CollaboratorComponent } from './components/collaborator/collaborator.co
     ArchiveNotesComponent,
     TrashNotesComponent,
     UpdateNotesComponent,
-    CollaboratorComponent
+    CollaboratorComponent,
+    SetReminderComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,10 @@ import { CollaboratorComponent } from './components/collaborator/collaborator.co
     MatDialogModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
-    FormsModule
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+
   
   
   ],

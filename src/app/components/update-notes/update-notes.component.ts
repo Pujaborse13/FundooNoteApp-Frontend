@@ -25,7 +25,17 @@ export class UpdateNotesComponent {
     this.color = note.color;
   }
 
+  ngOnDestroy() {
+    this.updateNote();  // This ensures update is triggered on any close
+  }
+
+  private isUpdated = false;
+
   updateNote() {
+
+    if (this.isUpdated) return;  // Prevent double-call
+    this.isUpdated = true;
+    
     const updatedNote = {
       ...this.note,
       title: this.title,
@@ -34,6 +44,7 @@ export class UpdateNotesComponent {
     };
 
     this.noteService.updateNote(this.note.noteId, updatedNote).subscribe({
+
       next: () => {
         this.snackBar.open('Note updated successfully', 'Close', { duration: 3000 });
         this.dialogRef.close(updatedNote);

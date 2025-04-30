@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Select Reminder</h2>
+<mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Pick a date & time</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Time</mat-label>
+    <input matInput type="time" [(ngModel)]="selectedDate">
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSetReminder()">Set Reminder</button>
+</mat-dialog-actions>

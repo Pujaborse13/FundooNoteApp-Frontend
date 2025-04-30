@@ -100,7 +100,6 @@ export class AddNoteComponent implements OnInit {
         next: (response: any) => {
           this.snackBar.open('Note saved successfully!', 'Close', {duration: 3000});
           this.noteAdded.emit(response); // Emit if parent wants to refresh list
-         // this.noteAdded.emit(response); // Emit if parent wants to refresh list
           
           this.resetNote(); // Reset after successful add
         },

@@ -29,16 +29,16 @@ export class CollaboratorComponent {
       this.snackBar.open("Please enter a valid email!", "Close", { duration: 3000 });
       return;
     }
-
+  
     const payload = {
       noteId: this.note.noteId,
       email: this.email
     };
-
+  
     this.collaboratorService.addCollaborator(payload).subscribe({
       next: (res: any) => {
-        this.snackBar.open("Collaborator added successfully!", "Close", { duration: 3000 });
-        this.dialogRef.close(this.email);  // optionally return email
+        this.snackBar.open("Added to Collaborate!", "Close", { duration: 3000 });
+        this.dialogRef.close(this.email);  // Return email to parent if needed
       },
       error: (err) => {
         console.error("Error adding collaborator", err);
@@ -46,5 +46,4 @@ export class CollaboratorComponent {
       }
     });
   }
-
 }

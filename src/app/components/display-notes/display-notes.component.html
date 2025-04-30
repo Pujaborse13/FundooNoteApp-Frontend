@@ -20,6 +20,13 @@
         <p>{{ note.description }}</p>
       </div>
   
+
+      <div *ngIf="note.reminder" class="reminder-chip">
+        <mat-icon class="watch-icon">watch_later</mat-icon>
+        {{ note.reminder | date:'short' }}
+      </div>
+
+      
       <div class="tile-footer">
          <!-- only when note.isTrash is true -->
         <ng-container *ngIf="note.isTrash">
@@ -39,7 +46,7 @@
         <button mat-icon-button class="icon-button"  matTooltip="Background Options" matTooltipPosition="below" (click)="toggleColorPicker(note, $event)">
           <mat-icon fontSet="material-icons-outlined">palette</mat-icon>
         </button>
-        <button mat-icon-button class="icon-button"  matTooltip="Remind Me" matTooltipPosition="below" >
+        <button mat-icon-button class="icon-button"  matTooltip="Remind Me" matTooltipPosition="below" (click)="setReminder(note, $event)">
           <mat-icon fontSet="material-icons-outlined">notifications_none</mat-icon>
         </button>
 
@@ -111,6 +118,18 @@
         </div>
       </div>
 
+      <!-- <div class="collaborators" *ngIf="note.collaborators && note.collaborators.length > 0">
+        <button *ngFor="let collaborator of note.collaborators"
+                mat-icon-button
+                [matTooltip]="collaborator.email"
+                matTooltipPosition="above"
+                class="collab-icon">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </div> -->
+
+      
+      
 
     </div>
   </div>

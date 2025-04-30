@@ -13,8 +13,9 @@ export class NoteService {
   {
     this.token = localStorage.getItem('Token');
     console.log(this.token);
-
    }
+
+
 
 
   createNote(payload: any)
@@ -105,9 +106,37 @@ export class NoteService {
       }),
     };
     return this.http.putApi(`/updateNote?noteId=${noteId}`, payload, httpOptions.headers);
+
   }
   
 
+  setReminderToNote(noteId: number, reminder: Date) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${this.token}`,
+      }),
+    };
+    const reminderIso = reminder.toISOString();
+
+    return this.http.putApi(`/addReminder?noteId=${noteId}&reminder=${encodeURIComponent(reminderIso)}`, null, httpOptions.headers);
+    //return this.http.putApi(`/updateNote?noteId=${noteId}`, payload, httpOptions.headers);
+
+  }
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
 
 }
 

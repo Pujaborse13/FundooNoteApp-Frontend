@@ -5,6 +5,7 @@ import { NoteService } from 'src/app/services/note/note.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateNotesComponent } from '../update-notes/update-notes.component';
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
+import { SetReminderComponent } from '../set-reminder/set-reminder.component';
 
 interface Note {
   noteId: number
@@ -14,6 +15,9 @@ interface Note {
   showColorPicker :boolean;
   isArchive: boolean;
   isTrash : boolean;
+  reminder: Date;
+  //collaborators?: { email: string }[];
+
 }
 
 @Component({
@@ -248,7 +252,8 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
     
 
     const dialogRef = this.dialog.open(UpdateNotesComponent, {
-      data: note
+      data: note,
+      disableClose: true//Prevent closing without pressing the button
     });
 
     dialogRef.afterClosed().subscribe((updatedNote) => {
@@ -295,7 +300,28 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
 
 
 
-
+  setReminder(note: Note, event: MouseEvent): void {
+    event.stopPropagation();
+  
+    const dialogRef = this.dialog.open(SetReminderComponent, {
+      width: '300px',
+      data: note
+    });
+  
+    dialogRef.afterClosed().subscribe((selectedDate: Date) => {
+      if (selectedDate) {
+        this.noteService.setReminderToNote(note.noteId, selectedDate).subscribe({
+          next: () => {
+            note.reminder = selectedDate;
+            this.snackBar.open('Reminder set successfully!', 'Close', { duration: 3000 });
+          },
+          error: () => {
+            this.snackBar.open('Failed to set reminder.', 'Close', { duration: 3000 });
+          }
+        });
+      }
+    });
+  }
 
 
 

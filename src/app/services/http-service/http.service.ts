@@ -20,6 +20,7 @@ export class HttpService {
   {
     return this.http.post(this.BASE_URL + endpoint, payload,{headers});
   }
+
   getApi(endpoint: string, headers: HttpHeaders = new HttpHeaders()) {
     return this.http.get(this.BASE_URL + endpoint, { headers });
   }
