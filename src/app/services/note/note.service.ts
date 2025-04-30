@@ -41,21 +41,6 @@ export class NoteService {
 
   }
 
-
-  // archiveNote(payload : any)
-  // {
-  //   let httpOption = {
-  //     headers : new HttpHeaders({
-  //       'Content-type' : 'application/json',
-  //       'Authorization' : `Bearer ${this.token}`,
-  //     }),
-  //   };
-  //   return this.http.putApi('/archiveNote',payload.id,httpOption.headers);
-
-
-  // }
-
-
   archiveNote(noteId: number) {
     const httpOption = {
       headers: new HttpHeaders({
@@ -96,6 +81,34 @@ export class NoteService {
   }
 
   
+  addColor(noteId: number , color: string)
+  {
+    const httpOption = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }),
+    };
+    console.log("Header",httpOption);
+   //return this.http.putApi(`/addColour?noteId=${noteId}&color=${color}`, {}, httpOption.headers);
+   return this.http.putApi(`/addColour?noteId=${noteId}&color=${encodeURIComponent(color)}`, {}, httpOption.headers);
+
+
+  }
+
+  
+  updateNote(noteId: number, payload: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${this.token}`,
+      }),
+    };
+    return this.http.putApi(`/updateNote?noteId=${noteId}`, payload, httpOptions.headers);
+  }
+  
+
+
 }
 
 

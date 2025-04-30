@@ -27,6 +27,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AllNotesComponent } from './components/all-notes/all-notes.component';
 import { ArchiveNotesComponent } from './components/archive-notes/archive-notes.component';
 import { TrashNotesComponent } from './components/trash-notes/trash-notes.component';
+import { UpdateNotesComponent } from './components/update-notes/update-notes.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { CollaboratorComponent } from './components/collaborator/collaborator.component';
+
 
 
 
@@ -40,7 +45,9 @@ import { TrashNotesComponent } from './components/trash-notes/trash-notes.compon
     DisplayNotesComponent,
     AllNotesComponent,
     ArchiveNotesComponent,
-    TrashNotesComponent
+    TrashNotesComponent,
+    UpdateNotesComponent,
+    CollaboratorComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +68,12 @@ import { TrashNotesComponent } from './components/trash-notes/trash-notes.compon
     MatGridListModule,
     MatMenuModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    FormsModule
+  
   
   ],
   providers: [],

@@ -1,0 +1,42 @@
+<mat-dialog-content>
+  <div class="update-note-card" [ngStyle]="{ 'background-color': color || '#ffffff' }">
+     
+
+    <div class="update-note-header tile-header">
+      <input [(ngModel)]="title" placeholder="Title" class="update-title-input" />
+      <mat-icon class="update-pin-icon pin-button">
+        {{ note.isPinned ? 'push_pin' : '' }}
+      </mat-icon>
+    </div>
+
+    <div class="update-note-content tile-body">
+      <textarea [(ngModel)]="description" placeholder="Take a note..." rows="5"></textarea>
+    </div>
+
+    <div class="tile-footer">
+      <button mat-icon-button class="icon-button">
+        <mat-icon fontSet="material-icons-outlined">palette</mat-icon>
+      </button>
+      <button mat-icon-button class="icon-button">
+        <mat-icon fontSet="material-icons-outlined">notifications_none</mat-icon>
+      </button>
+      <button mat-icon-button class="icon-button">
+        <mat-icon fontSet="material-icons-outlined">person_add</mat-icon>
+      </button>
+      <button mat-icon-button class="icon-button">
+        <mat-icon fontSet="material-icons-outlined">image</mat-icon>
+      </button>
+      <button mat-icon-button class="icon-button">
+        <mat-icon fontSet="material-icons-outlined">archive</mat-icon>
+      </button>
+      <button mat-icon-button class="icon-button">
+        <mat-icon fontSet="material-icons-outlined">more_vert</mat-icon>
+      </button>
+    </div>
+
+    <div class="update-dialog-actions">
+      <button mat-button (click)="closeDialog()">Close</button>
+    </div>
+    
+  </div>
+</mat-dialog-content>

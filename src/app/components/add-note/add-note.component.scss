@@ -285,7 +285,7 @@ html, body {
 }
 
 .collapsed-container {
-  min-height: 15; /* Smaller height like Google Keep */
+  min-height: 15px; /* Smaller height like Google Keep */
   padding: 2px 3px; /* Light padding for spacing */
   display: flex;
   align-items: center;
@@ -325,6 +325,7 @@ html, body {
 }
 
 .collapsed-icons button:hover {
-  size: 10px;
+  //size: 5px;
   background-color: #e0e0e0; /* Light gray highlight on hover */
+  transform: scale(0.9);
 }

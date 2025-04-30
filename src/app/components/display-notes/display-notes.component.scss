@@ -77,8 +77,6 @@
 }
 
 
-
-
 .tile-footer {
   display: flex;
   justify-content: space-between;
@@ -86,6 +84,11 @@
   position: relative; /* Add this */
 }
 
+
+.trash-actions {
+  display: flex;
+  gap: 10px;
+}
 .color-picker {
   width: max-content;
   display: flex;

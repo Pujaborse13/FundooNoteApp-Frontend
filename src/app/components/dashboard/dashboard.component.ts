@@ -10,7 +10,7 @@ import { NoteService } from 'src/app/services/note/note.service';
 })
 export class DashboardComponent {
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private noteService : NoteService){}
 
   isSidenavExpanded = true;
   showArchived : boolean = false;
@@ -24,12 +24,6 @@ export class DashboardComponent {
     }
 
 
-    // selectedItem: string = 'notes';     
-    //  selectItem(item: string): void {
-    //    this.selectedItem = item;
-    //  }
-
-
      //logout user / remove token
      logout()
       {
@@ -41,7 +35,7 @@ export class DashboardComponent {
 
        
 
-      // Set active tab and toggle archived notes display
+ // Set active tab and toggle archived notes display
    setActive(item: string) 
    {
      this.activeItem = item;
@@ -66,6 +60,30 @@ export class DashboardComponent {
 
       
    }
+
+
+
+   isSpinning: boolean = false;
+   currentRefreshIcon: string = 'refresh';
+    triggerRefreshAnimation(): void {
+      this.isSpinning = true;
+      this.currentRefreshIcon = 'refresh';
+
+      // Start spinning
+      setTimeout(() => {
+        // Switch to cloud icon briefly
+        this.isSpinning = false;
+        this.currentRefreshIcon = 'cloud_sync';
+
+        setTimeout(() => {
+          // Switch back to refresh icon
+          this.currentRefreshIcon = 'refresh';
+        }, 2000); //cloud
+
+      }, 3000); // Spinning 
+}
+
+
     
    
 

@@ -2,7 +2,7 @@
 <mat-toolbar class="header">
   <div class="header-icons">
     
-    <button mat-icon-button (click)="toggleSidenav()" aria-label="Toggle sidenav">
+    <button mat-icon-button matTooltip="Main menu" matTooltipPosition="below"  (click)="toggleSidenav()" aria-label="Toggle sidenav">
       <mat-icon fontSet="material-icons-outlined">menu</mat-icon>
     </button>
 
@@ -27,22 +27,33 @@
     <div class="sub-icons">
 
       <div class="sub-icons-one">
-        <button mat-icon-button aria-label="Refresh">
+
+        <!-- <button mat-icon-button aria-label="Refresh" matTooltip="Refresh" matTooltipPosition="below" 
+                      (click)="refreshNotes()"  [class.spin]="isRefreshing">
           <mat-icon fontSet="material-icons-outlined">refresh</mat-icon>
+        </button> -->
+
+        <button mat-icon-button aria-label="Refresh" matTooltip="Refresh" matTooltipPosition="below"
+                          (click)="triggerRefreshAnimation()">
+            <mat-icon fontSet="material-icons-outlined" [class.spin]="isSpinning"
+  >
+                  {{ currentRefreshIcon }}</mat-icon>
         </button>
-        <button mat-icon-button aria-label="view_agenda">
+
+        <button mat-icon-button aria-label="view_agenda" matTooltip="List View" matTooltipPosition="below">
           <mat-icon fontSet="material-icons-outlined">view_agenda</mat-icon>
         </button>
-        <button mat-icon-button aria-label="Settings">
+
+        <button mat-icon-button aria-label="Settings" matTooltip="Setting" matTooltipPosition="below">
           <mat-icon fontSet="material-icons-outlined">settings</mat-icon>
         </button>
       </div>
 
       <div class="sub-icons-two">
-        <button mat-icon-button aria-label="Apps">
+        <button mat-icon-button aria-label="Apps"matTooltip="Google Apps" matTooltipPosition="below">
           <mat-icon fontSet="material-icons-outlined">apps</mat-icon>
         </button>
-        <button [matMenuTriggerFor]="accountMenu" mat-icon-button aria-label="Profile">
+        <button [matMenuTriggerFor]="accountMenu" mat-icon-button aria-label="Profile" matTooltip="My Profile" matTooltipPosition="below">
           <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
         </button>
       </div>

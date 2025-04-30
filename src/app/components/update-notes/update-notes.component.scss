@@ -1,0 +1,100 @@
+
+  .update-note-card {
+    position: relative;
+    border-color: transparent;
+    border-radius: 5px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+    cursor: pointer;
+  
+    .check-icon {
+      position: absolute;
+      top: 0.5px;
+      left: 0.5px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      padding: 0;
+      border: none;
+    }
+  
+    
+  
+    .tile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .tile-body {
+      margin: 5px 0;
+    }
+  
+    .tile-body textarea {
+      width: 100%;
+      border: none;
+      background: transparent;
+      resize: none;
+      outline: none;
+      font-size: 16px;
+    }
+  
+    .tile-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .icon-button {
+      font-size: 18px;
+      width: 35px;
+      height: 35px;
+  
+      mat-icon {
+        font-size: 20px;
+        color: gray;
+      }
+    }
+  
+  
+    .update-dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+  
+    .update-title-input {
+      border: none;
+      background: transparent;
+      font-size: 16px;
+      font-weight: 500;
+      width: 100%;
+      outline: none;
+    }
+  }
+
+  
+  ::ng-deep .mat-dialog-container {
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+  
+  .update-note-card {
+    border: none;
+    box-shadow: none;
+    background-color: transparent; // or set to your desired note background
+  }
+  
+  

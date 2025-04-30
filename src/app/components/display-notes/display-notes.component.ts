@@ -2,6 +2,9 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { NoteService } from 'src/app/services/note/note.service';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateNotesComponent } from '../update-notes/update-notes.component';
+import { CollaboratorComponent } from '../collaborator/collaborator.component';
 
 interface Note {
   noteId: number
@@ -27,7 +30,7 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
 
   //recived value from parent
   @Input() showArchived : boolean= false //Input property to determine whether to archived or non-archived notes
-  
+
   @Input() showTrashed : boolean = false
 
   colors: string[] = [
@@ -37,7 +40,9 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
 
   constructor(private noteService: NoteService , 
               private snackBar :MatSnackBar, 
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private dialog: MatDialog ,
+            ) {}
 
   ngOnInit() {
    this.getNotes(); //display notes while loading 
@@ -90,15 +95,41 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
   }
 
   // Select color for the note
-  selectColor(note : Note, color: string): void {
-    note.color = color;
+  selectColor(note : Note, color: string , event: MouseEvent): void {
+    event.stopPropagation();
+
+    console.log("Color received in selectColor():", color);
+
+    if (!color || color.trim() === '') {
+      console.warn('No color selected. Ignoring...');
+      this.snackBar.open('No color selected.', 'Close', { duration: 2000 });
+
+      return;
+    }
+    
     note.showColorPicker = false;
+    note.color = color; 
+    this.noteService.addColor(note.noteId ,color).subscribe({
+
+      next: (res: any) =>{
+
+        this.snackBar.open('Color Updated Sucessfully !', 'close', {duration: 3000});
+        console.log("Selected color:", color);
+
+      },
+      error:(err: any)=>{
+        console.error('Error Updating color',err);
+        this.snackBar.open('Failed to update color.', 'Close', { duration: 3000 });
+
+
+      } 
+    })
   }
  
-
    // Archive a note by noteId
-  onArchiveNote(note: Note)
+  onArchiveNote(note: Note , event : MouseEvent)
   {
+    event.stopPropagation();
     this.noteService.archiveNote(note.noteId).subscribe({
           next:(res :any) =>{
             console.log("Note archive sucessfully", res);
@@ -122,8 +153,10 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
   }
 
 
-  OnTrashNote(note:Note)
+  OnTrashNote(note:Note, event : MouseEvent)
   {
+    event.stopPropagation();
+    
      const originalIsTrash = note.isTrash; //First, backup the current note state
       // note.isTrash = true; // Immediately move the note to trash
 
@@ -173,7 +206,8 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
   }
 
 
-  OnDeleteNote(note: Note): void {
+  OnDeleteNote(note: Note , event : MouseEvent): void {
+    event.stopPropagation();
     this.noteService.deleteNote(note.noteId).subscribe({
       next: (res: any) => {
         console.log('Note permanently deleted', res);
@@ -190,7 +224,9 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
   }
   
 
-  OnRestore(note: Note): void {
+  OnRestore(note: Note , event : MouseEvent): void {
+    event.stopPropagation();
+
     note.isTrash = false; // Update the local state
     this.noteService.trashNote(note.noteId).subscribe({
       next: (res: any) => {
@@ -207,4 +243,72 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
 
 
 
+  openNoteForEdit(note: any , event: MouseEvent) {
+    event.stopPropagation();
+    
+
+    const dialogRef = this.dialog.open(UpdateNotesComponent, {
+      data: note
+    });
+
+    dialogRef.afterClosed().subscribe((updatedNote) => {
+      if (updatedNote) {
+        const index = this.allNotes.findIndex((n: any) => n.noteId === updatedNote.noteId);
+        if (index !== -1) {
+          this.allNotes[index] = updatedNote;
+        }
+      }
+    });
+  }
+
+
+  openCollaboratorDialog(note: any, event: MouseEvent) {
+    event.stopPropagation();
+    const dialogRef = this.dialog.open(CollaboratorComponent, {
+      width: '400px',
+      data: note
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log("Collaborator added:", result);
+        // You can refresh note data here if needed
+      }
+    });
+  }
+
+
+
+  onPinNote(note: Note, event: MouseEvent): void {
+    event.stopPropagation();
+    // TODO: implement pin/unpin logic
+    this.snackBar.open('Pin clicked (functionality pending)', 'Close', { duration: 2000 });
+  }
+  
+
+
+  onMoreClicked(event: MouseEvent): void {
+    event.stopPropagation();
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+

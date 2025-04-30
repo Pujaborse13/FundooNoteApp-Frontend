@@ -1,0 +1,13 @@
+<h2 mat-dialog-title class="dialog-title">Add Collaborator</h2>
+
+<div mat-dialog-content class="dialog-content">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="email" placeholder="Enter collaborator email">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+</div>

@@ -16,23 +16,6 @@ export class HttpService {
     });
   }
 
-
-  // getHeader() {
-  //   const header = new HttpHeaders({
-  //     Authorization: localStorage.getItem('authToken') || '',
-  //   });
-  //   return header;
-  // }
-  // postCreateNoteApi(endpoint: string, payload: any) {
-  //   const headers = this.getHeader();
-  //   return this.http.post(`${this.BASE_URL}${endpoint}`, payload, { headers });
-  // }
-
-
-  // getApi(endpoint: string, headers: HttpHeaders = this.getHeader()) {
-  //   return this.http.get(`${this.BASE_URL}${endpoint}`, { headers });
-  // }
-
   postApi(endpoint: string , payload:any , headers :HttpHeaders = new HttpHeaders())
   {
     return this.http.post(this.BASE_URL + endpoint, payload,{headers});
@@ -46,10 +29,12 @@ export class HttpService {
   }
 
 
+
   deleteApi(endpoint: string, headers: HttpHeaders = new HttpHeaders() ) {
     return this.http.delete(this.BASE_URL + endpoint, {headers});
   }
 
+  
 
 
   
