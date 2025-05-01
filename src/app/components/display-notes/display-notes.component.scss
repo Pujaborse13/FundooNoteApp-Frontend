@@ -221,3 +221,48 @@
   font-size: 18px;
   margin-right: 5px;
 }
+
+
+// list view 
+// .list-view {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 12px;
+
+//   .note-tile {
+//     width: 100%;
+//     max-width: 800px;
+//     margin: 0 auto;
+//   }
+// }
+
+.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .note-tile {
+    width: 100%;
+    max-width: 800px;  // Optional: limits note width for cleaner center-aligned look
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
+    transition: box-shadow 0.2s;
+    
+    &:hover {
+      box-shadow: 0 3px 6px rgba(60, 64, 67, 0.3);
+    }
+  }
+}
+
+
+.grid-container.list-view {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-container.list-view .note-tile {
+  width: 100%;
+  margin-bottom: 16px;
+}
+

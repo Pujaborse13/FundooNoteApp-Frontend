@@ -33,11 +33,16 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
   isColorPickerVisible: boolean = false;
 
   //recived value from parent
-  @Input() showArchived : boolean= false //Input property to determine whether to archived or non-archived notes
+  @Input() showArchived : boolean= false; //Input property to determine whether to archived or non-archived notes
 
-  @Input() showTrashed : boolean = false
+  @Input() showTrashed : boolean = false;
 
   @Input() showReminder: boolean = false;
+
+  @Input() isListView: boolean = false;
+
+  
+
 
   colors: string[] = [
     '#FFF9C4', '#FFE0B2', '#E1BEE7', '#B2EBF2', '#B3E5FC', '#F8BBD0',

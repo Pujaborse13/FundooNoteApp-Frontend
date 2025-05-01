@@ -40,8 +40,10 @@
                   {{ currentRefreshIcon }}</mat-icon>
         </button>
 
-        <button mat-icon-button aria-label="view_agenda" matTooltip="List View" matTooltipPosition="below">
-          <mat-icon fontSet="material-icons-outlined">view_agenda</mat-icon>
+        <!-- Toggle list view , grid view -->
+        <button mat-icon-button aria-label= "Toggle View" matTooltip="{{ isListView ? 'Grid View' : 'List View' }}" matTooltipPosition="below"
+              (click)="toggleViewMode()">
+          <mat-icon fontSet="material-icons-outlined">{{ isListView ? 'grid_view' : 'view_agenda' }}</mat-icon>
         </button>
 
         <button mat-icon-button aria-label="Settings" matTooltip="Setting" matTooltipPosition="below">
@@ -83,6 +85,12 @@
         <mat-icon fontSet="material-icons-outlined">notifications</mat-icon>
         <span class="sidenav-label" *ngIf="isSidenavExpanded">Reminders</span>
       </button>
+
+
+      <button mat-list-item [ngClass]="{ 'active': activeItem === 'Labels' }" (click)="openEditLabelDialog()">
+        <mat-icon fontSet="material-icons-outlined">edit</mat-icon>
+        <span class="sidenav-label" *ngIf="isSidenavExpanded">Edit labels</span>
+      </button>
       
       <button mat-list-item [ngClass]="{ 'active': activeItem === 'Labels' }">
         <mat-icon fontSet="material-icons-outlined">label</mat-icon>
@@ -109,7 +117,9 @@
     <app-all-notes 
         [showArchived]="showArchived" 
         [showTrashed] ="showTrashed"
-        [showReminder]="showReminder">
+        [showReminder]="showReminder"
+        [isListView]="isListView">
+        
     </app-all-notes>
      <!-- <router-outlet></router-outlet>  -->
   </mat-sidenav-content>

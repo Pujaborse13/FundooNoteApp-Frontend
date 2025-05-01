@@ -1,4 +1,5 @@
-<div class="grid-container">
+
+<div class="grid-container" [ngClass]="{ 'list-view': isListView }">
     
   <div class="note-tile" *ngFor="let note of allNotes" (click)="openNoteForEdit(note , $event)"
                          [ngStyle]="{ 'background-color': note.color || '#ffffff' }">
@@ -20,11 +21,6 @@
         <p>{{ note.description }}</p>
       </div>
   
-      <!-- <div *ngIf="isReminderValid(note.reminder)">
-        Reminder: {{ note.reminder | date: 'short' }}
-      </div> -->
-      
-
       <div *ngIf="isReminderValid(note.reminder)" class="reminder-chip">
         <mat-icon class="watch-icon">watch_later</mat-icon>
         {{ note.reminder | date:'short' }}

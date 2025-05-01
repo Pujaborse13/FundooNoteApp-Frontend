@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NoteService } from 'src/app/services/note/note.service';
+import { EditLabelComponent } from '../edit-label/edit-label.component';
+import { MatDialog } from '@angular/material/dialog';
+import { LabelService } from 'src/app/services/label/label.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
+
 
 
 @Component({
@@ -9,22 +15,29 @@ import { NoteService } from 'src/app/services/note/note.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+  //labels: any[] = [];
 
-  constructor(private router: Router, private noteService : NoteService){}
+
+  constructor(private router: Router, 
+              private noteService : NoteService,
+              private dialog: MatDialog,
+              private labelService: LabelService,
+              private snackBar: MatSnackBar,){}
+
 
   isSidenavExpanded = true;
-  showArchived : boolean = false;
-  showTrashed : boolean = false;
   activeItem: string = 'Notes'; //deafault Selected
   currentTitle: string = 'FunDoo';  // Default title
+  
+  showArchived : boolean = false;
+  showTrashed : boolean = false;
   showReminder: boolean = false;
-
-
+  isListView: boolean = false;
+  
 
     toggleSidenav() {
       this.isSidenavExpanded = !this.isSidenavExpanded;
     }
-
 
      //logout user / remove token
      logout()
@@ -55,6 +68,7 @@ export class DashboardComponent {
            this.showTrashed = false; // hide trashed notes
            this.showArchived = false; // Hide archived notes
         }
+
       else{  
         this.showArchived = false; // Show regular notes when Notes tab is clicked
         this.showTrashed = false; // Hide trashed notes
@@ -70,7 +84,8 @@ export class DashboardComponent {
 
    isSpinning: boolean = false;
    currentRefreshIcon: string = 'refresh';
-    triggerRefreshAnimation(): void {
+    triggerRefreshAnimation(): void 
+    {
       this.isSpinning = true;
       this.currentRefreshIcon = 'refresh';
 
@@ -86,11 +101,50 @@ export class DashboardComponent {
         }, 2000); //cloud
 
       }, 3000); // Spinning 
-}
+    }
+
+
+    toggleViewMode(): void {
+      this.isListView = !this.isListView;
+    }
 
 
     
-   
+    openEditLabelDialog() {
+      this.dialog.open(EditLabelComponent, {
+        width: '400px',
+        disableClose: true
+      });
+    }
 
 
+
+    // ngOnInit() {
+    //   this.loadLabels();
+    // }
+
+    // loadLabels() {
+    //   this.labelService.getAllLabels().subscribe(
+    //     (res) => {
+    //       this.labels = res.data || res; // adapt as per your API
+    //     },
+    //     (err) => console.error('Failed to load labels', err)
+    //   );
+    // }
+
+    // openEditLabelDialog() {
+    //   const dialogRef = this.dialog.open(EditLabelComponent, {
+    //     width: '400px',
+    //     disableClose: true,
+    //   });
+  
+    //   dialogRef.afterClosed().subscribe((result) => {
+    //     if (result === 'label-created') {
+    //       this.snackBar.open('Label created successfully!', 'Close', {
+    //         duration: 3000,
+    //       });
+    //       this.loadLabels(); // Refresh label list in sidenav
+    //     }
+    //   });
+    // }
 }

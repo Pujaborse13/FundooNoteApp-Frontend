@@ -17,6 +17,8 @@ export class AllNotesComponent {
 
   @Input() showReminder: boolean = false;
 
+  @Input() isListView: boolean = false;
+
 
 
 
