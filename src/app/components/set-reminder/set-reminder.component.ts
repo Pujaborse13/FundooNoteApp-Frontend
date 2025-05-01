@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NoteService } from 'src/app/services/note/note.service';
 
 @Component({
   selector: 'app-set-reminder',
@@ -7,19 +8,36 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./set-reminder.component.scss']
 })
 export class SetReminderComponent {
-  selectedDate: Date = new Date();
+
+  selectedReminder:  string | null = null;
 
   constructor(
-    public dialogRef: MatDialogRef<SetReminderComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private dialogRef: MatDialogRef<SetReminderComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private noteService: NoteService
   ) {}
 
-  onCancel(): void {
+
+  setReminder() {
+    if (this.selectedReminder) {
+     
+      const payload = { reminder: new Date(this.selectedReminder).toISOString() };
+      //const payload = { reminder: this.selectedReminder };
+
+      this.noteService.addReminder(this.data.noteId, payload).subscribe({
+        next: (res) => {
+          console.log('Reminder set successfully:', res);
+          this.dialogRef.close(true); // Notify parent
+        },
+
+        error: (err) => {
+          console.error('Failed to set reminder:', err);
+        }
+      });
+    }
+  }
+
+  closeDialog() {
     this.dialogRef.close();
   }
-
-  onSetReminder(): void {
-    this.dialogRef.close(this.selectedDate);
-  }
-
 }

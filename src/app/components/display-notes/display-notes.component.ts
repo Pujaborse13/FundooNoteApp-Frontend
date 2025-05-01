@@ -37,6 +37,8 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
 
   @Input() showTrashed : boolean = false
 
+  @Input() showReminder: boolean = false;
+
   colors: string[] = [
     '#FFF9C4', '#FFE0B2', '#E1BEE7', '#B2EBF2', '#B3E5FC', '#F8BBD0',
     '#DCEDC8', '#EDE7F6', '#FFCDD2', '#FFF3E0', '#F5F5F5', '#E0F7FA'
@@ -66,20 +68,27 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
         console.log("API response:", res);
         this.allNotes = res.data ;
 
-        if(this.showArchived)
-        {
+
+        if(this.showArchived){
           this.allNotes= this.allNotes.filter((note : Note ) => note.isArchive && !note.isTrash);
-          
         }
-        else if(this.showTrashed)
-        {
+
+        else if(this.showTrashed){
           this.allNotes = this.allNotes.filter((note : Note ) => note.isTrash);
+        }
+        
+        else if (this.showReminder) {
+          this.allNotes = this.allNotes.filter((note: Note) => 
+            note.reminder !== null &&
+            note.reminder !== undefined &&
+            new Date(note.reminder).getTime() > 0 && // Check if it is a valid non-zero timestamp
+            !note.isTrash
+          );
+          //this.allNotes = this.allNotes.filter((note: Note) => !!note.reminder && !note.isTrash);
         }
         else
         {
           this.allNotes = this.allNotes.filter((note: Note) => !note.isArchive && !note.isTrash); // Show regular notes
-         // Filter notes based on the showArchived property
-          //this.allNotes = this.allNotes.filter((note: Note) => this.showArchived ? note.isArchive : !note.isArchive);
         }
 
       },
@@ -124,8 +133,6 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
       error:(err: any)=>{
         console.error('Error Updating color',err);
         this.snackBar.open('Failed to update color.', 'Close', { duration: 3000 });
-
-
       } 
     })
   }
@@ -302,30 +309,24 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
 
   setReminder(note: Note, event: MouseEvent): void {
     event.stopPropagation();
-  
+
+
     const dialogRef = this.dialog.open(SetReminderComponent, {
-      width: '300px',
-      data: note
+      data: { noteId: note.noteId }
     });
-  
-    dialogRef.afterClosed().subscribe((selectedDate: Date) => {
-      if (selectedDate) {
-        this.noteService.setReminderToNote(note.noteId, selectedDate).subscribe({
-          next: () => {
-            note.reminder = selectedDate;
-            this.snackBar.open('Reminder set successfully!', 'Close', { duration: 3000 });
-          },
-          error: () => {
-            this.snackBar.open('Failed to set reminder.', 'Close', { duration: 3000 });
-          }
-        });
+    
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getNotes(); // Refresh notes list
       }
-    });
+    });  
   }
 
-
-
-
+  //show future reminders only
+  isReminderValid(reminder: string | Date): boolean {
+    return new Date(reminder) > new Date(); 
+  }
+  
 
 
 

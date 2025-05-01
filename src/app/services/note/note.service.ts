@@ -110,19 +110,35 @@ export class NoteService {
   }
   
 
-  setReminderToNote(noteId: number, reminder: Date) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${this.token}`,
-      }),
-    };
-    const reminderIso = reminder.toISOString();
+  // setReminderToNote(noteId: number, reminder: Date) {
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-type': 'application/json',
+  //       Authorization: `Bearer ${this.token}`,
+  //     }),
+  //   };
+  //   const reminderIso = reminder.toISOString();
 
-    return this.http.putApi(`/addReminder?noteId=${noteId}&reminder=${encodeURIComponent(reminderIso)}`, null, httpOptions.headers);
-    //return this.http.putApi(`/updateNote?noteId=${noteId}`, payload, httpOptions.headers);
+  //   return this.http.putApi(`/addReminder?noteId=${noteId}&reminder=${encodeURIComponent(reminderIso)}`, null, httpOptions.headers);
+  //   //return this.http.putApi(`/updateNote?noteId=${noteId}`, payload, httpOptions.headers);
 
-  }
+  // }
+
+
+    //add remainder
+    
+    addReminder(noteId: any, payload: any)
+    {
+      
+      let httpOption = {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${this.token}`,
+          'Content-Type': 'application/json'
+        })
+      };
+    
+      return this.http.putApi(`/addReminder/${noteId}`, payload, httpOption.headers);
+    }
 
 
 

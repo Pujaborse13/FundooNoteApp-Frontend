@@ -79,7 +79,7 @@
         <span class="sidenav-label" *ngIf="isSidenavExpanded">Notes</span>
       </button>
       
-      <button mat-list-item [ngClass]="{ 'active': activeItem === 'Reminders' }" >
+      <button mat-list-item [ngClass]="{ 'active': activeItem === 'Reminders' }" (click)="setActive('Reminder')" >
         <mat-icon fontSet="material-icons-outlined">notifications</mat-icon>
         <span class="sidenav-label" *ngIf="isSidenavExpanded">Reminders</span>
       </button>
@@ -108,7 +108,9 @@
   <mat-sidenav-content>
     <app-all-notes 
         [showArchived]="showArchived" 
-        [showTrashed] ="showTrashed"></app-all-notes>
+        [showTrashed] ="showTrashed"
+        [showReminder]="showReminder">
+    </app-all-notes>
      <!-- <router-outlet></router-outlet>  -->
   </mat-sidenav-content>
 

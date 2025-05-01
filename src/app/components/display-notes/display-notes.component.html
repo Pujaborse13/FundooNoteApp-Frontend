@@ -20,8 +20,12 @@
         <p>{{ note.description }}</p>
       </div>
   
+      <!-- <div *ngIf="isReminderValid(note.reminder)">
+        Reminder: {{ note.reminder | date: 'short' }}
+      </div> -->
+      
 
-      <div *ngIf="note.reminder" class="reminder-chip">
+      <div *ngIf="isReminderValid(note.reminder)" class="reminder-chip">
         <mat-icon class="watch-icon">watch_later</mat-icon>
         {{ note.reminder | date:'short' }}
       </div>

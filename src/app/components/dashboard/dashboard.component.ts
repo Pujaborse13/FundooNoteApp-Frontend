@@ -17,6 +17,8 @@ export class DashboardComponent {
   showTrashed : boolean = false;
   activeItem: string = 'Notes'; //deafault Selected
   currentTitle: string = 'FunDoo';  // Default title
+  showReminder: boolean = false;
+
 
 
     toggleSidenav() {
@@ -48,13 +50,16 @@ export class DashboardComponent {
          this.showTrashed = true; // Show trashed notes
          this.showArchived = false; // Hide archived notes
       }
-      // else if (item === 'Note') {
-      //      this.showTrashed = false; // Show trashed notes
-      //      this.showArchived = false; // Hide archived notes
-      //   }
+      else if (item === 'Reminder') {
+          this.showReminder = true;
+           this.showTrashed = false; // hide trashed notes
+           this.showArchived = false; // Hide archived notes
+        }
       else{  
         this.showArchived = false; // Show regular notes when Notes tab is clicked
         this.showTrashed = false; // Hide trashed notes
+        this.showReminder = false;//hide reminder
+
       }
       this.currentTitle = item === 'Notes' ? 'FunDoo' : item;
 
