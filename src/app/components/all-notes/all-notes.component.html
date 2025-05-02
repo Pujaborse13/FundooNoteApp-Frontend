@@ -1,13 +1,17 @@
 
-<!-- src/app/components/all-notes/all-notes.component.html -->
+
+<!-- Create Note (p->c) conditionally shows the AddNoteComponent only -->
 <app-add-note 
     *ngIf="!showArchived && !showTrashed" (noteAdded)="onNoteAdded()">
 </app-add-note>
 
-<!-- <app-display-notes [showArchived]="showArchived"></app-display-notes> -->
+
+
+<!-- Display Notes (c->p) -->
 <app-display-notes 
         [showArchived]="showArchived"
         [showTrashed] ="showTrashed"
         [showReminder]="showReminder"
+        [selectedLabel]="selectedLabel"
         [isListView]="isListView">
 </app-display-notes>

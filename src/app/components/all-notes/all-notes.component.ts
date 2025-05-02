@@ -8,9 +8,10 @@ import { DisplayNotesComponent } from '../display-notes/display-notes.component'
 })
 export class AllNotesComponent {
 
-  //parent comp. (AllNotesComponent) to get a direct reference to a child component instance (DisplayNotesComponent) 
+  //to access child methods directly (dis.notes)
   @ViewChild(DisplayNotesComponent) displayNoteComp !: DisplayNotesComponent;
 
+  
   @Input() showArchived: boolean = false; 
 
   @Input() showTrashed :boolean = false;
@@ -18,6 +19,9 @@ export class AllNotesComponent {
   @Input() showReminder: boolean = false;
 
   @Input() isListView: boolean = false;
+
+  @Input() selectedLabel: string | null = null;
+
 
 
 

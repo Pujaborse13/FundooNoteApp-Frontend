@@ -5,8 +5,6 @@ import { EditLabelComponent } from '../edit-label/edit-label.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LabelService } from 'src/app/services/label/label.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatChipsModule } from '@angular/material/chips';
-
 
 
 @Component({
@@ -15,8 +13,8 @@ import { MatChipsModule } from '@angular/material/chips';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  //labels: any[] = [];
 
+  labels: any[] = [];
 
   constructor(private router: Router, 
               private noteService : NoteService,
@@ -33,18 +31,20 @@ export class DashboardComponent {
   showTrashed : boolean = false;
   showReminder: boolean = false;
   isListView: boolean = false;
+  selectedLabel: string | null = null;
   
 
-    toggleSidenav() {
-      this.isSidenavExpanded = !this.isSidenavExpanded;
-    }
+
+      toggleSidenav() 
+      {
+        this.isSidenavExpanded = !this.isSidenavExpanded;
+      }
 
      //logout user / remove token
-     logout()
+      logout()
       {
         localStorage.removeItem('token');
         console.log("User logged out !");
-
         this.router.navigate(['/login']);
       }
 
@@ -58,15 +58,23 @@ export class DashboardComponent {
       if (item === 'Archive') {
         this.showArchived = true; // Show archived notes , Archive tab is clicked
         this.showTrashed = false; // Hide trashed notes
+        this.showReminder = false; // Hide reminder notes
       } 
       else if (item === 'Trash') {
          this.showTrashed = true; // Show trashed notes
          this.showArchived = false; // Hide archived notes
+         this.showReminder = false; // Hide reminder notes
       }
       else if (item === 'Reminder') {
           this.showReminder = true;
            this.showTrashed = false; // hide trashed notes
            this.showArchived = false; // Hide archived notes
+        }
+        else if (this.labels.some(label => label.labelName === item)) {
+          this.showArchived = false;
+          this.showTrashed = false;
+          this.showReminder = false;
+          this.currentTitle = item;
         }
 
       else{  
@@ -79,8 +87,6 @@ export class DashboardComponent {
 
       
    }
-
-
 
    isSpinning: boolean = false;
    currentRefreshIcon: string = 'refresh';
@@ -111,40 +117,35 @@ export class DashboardComponent {
 
     
     openEditLabelDialog() {
-      this.dialog.open(EditLabelComponent, {
+      const dialogRef = this.dialog.open(EditLabelComponent, {
         width: '400px',
         disableClose: true
+      });
+      
+      dialogRef.componentInstance.labelsChanged.subscribe(() => {
+        this.loadLabels();  // Refresh sidenav labels
       });
     }
 
 
 
-    // ngOnInit() {
-    //   this.loadLabels();
-    // }
+    ngOnInit() {
+      this.loadLabels();
+    }
 
-    // loadLabels() {
-    //   this.labelService.getAllLabels().subscribe(
-    //     (res) => {
-    //       this.labels = res.data || res; // adapt as per your API
-    //     },
-    //     (err) => console.error('Failed to load labels', err)
-    //   );
-    // }
+    loadLabels() 
+    {
+      this.labelService.GetLabelByUserId().subscribe({
+      next: (res: any) => {
+      this.labels = res?.data || [];
+    },
+      error: (err) => {
+      console.error('Failed to load labels', err);
+       }
+    });
+  }
 
-    // openEditLabelDialog() {
-    //   const dialogRef = this.dialog.open(EditLabelComponent, {
-    //     width: '400px',
-    //     disableClose: true,
-    //   });
+
   
-    //   dialogRef.afterClosed().subscribe((result) => {
-    //     if (result === 'label-created') {
-    //       this.snackBar.open('Label created successfully!', 'Close', {
-    //         duration: 3000,
-    //       });
-    //       this.loadLabels(); // Refresh label list in sidenav
-    //     }
-    //   });
-    // }
+   
 }

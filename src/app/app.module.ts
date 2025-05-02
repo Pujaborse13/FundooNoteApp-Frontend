@@ -35,9 +35,7 @@ import { SetReminderComponent } from './components/set-reminder/set-reminder.com
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { EditLabelComponent } from './components/edit-label/edit-label.component';
-
-
-
+import { AssignLabelComponent } from './components/assign-label/assign-label.component';
 
 
 @NgModule({
@@ -54,7 +52,8 @@ import { EditLabelComponent } from './components/edit-label/edit-label.component
     UpdateNotesComponent,
     CollaboratorComponent,
     SetReminderComponent,
-    EditLabelComponent
+    EditLabelComponent,
+    AssignLabelComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +79,9 @@ import { EditLabelComponent } from './components/edit-label/edit-label.component
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatChipsModule
+    MatChipsModule,
+    MatListModule,
+
 
 
   

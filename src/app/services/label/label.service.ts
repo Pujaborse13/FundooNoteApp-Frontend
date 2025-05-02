@@ -26,6 +26,63 @@ export class LabelService {
       };
       return this.http.postApi('/createNewLabel',payload, httpOption.headers);
     }
+
+
+     
+  GetLabelByUserId()
+  {
+    let httpOption = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+       'Authorization': `Bearer ${this.token}`,
+      }), 
+    };
+    return this.http.getApi('/getLabelByUserId',httpOption.headers);
+
+  }
   
 
+  deleteLabel(labelId: number) {
+    const httpOption = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      }),
+    };
+    return this.http.deleteApi(`/deleteLabel/${labelId}`, httpOption.headers);
+  }
+  
+
+
+  assignLabelByNoteId(payload: any)
+  {
+    let httpOption = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${this.token}`,
+      }),
+    };
+    return this.http.postApi('/assignLabelByNoteId',payload, httpOption.headers);
+  }
+
+
+  // RemoveLabelFromNote(noteId: number)
+  // {
+  //   const httpOption = {
+  //     headers: new HttpHeaders({
+  //       'Content-type': 'application/json',
+  //       'Authorization': `Bearer ${this.token}`
+  //     }),
+  //   };
+  //   console.log("Header",httpOption);
+  //   return this.http.deleteApi(`/removeLabelFromNote/${noteId}`,httpOption.headers);
+  // }
+
+
+  
+
+
 }
+
+
+

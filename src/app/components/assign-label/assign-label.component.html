@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Select Labels</h2>
+<mat-dialog-content>
+  <mat-selection-list [(ngModel)]="selectedLabels">
+    <mat-list-option *ngFor="let label of labels" [value]="label">
+      {{ label.labelName }}
+    </mat-list-option>
+  </mat-selection-list>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+</mat-dialog-actions>

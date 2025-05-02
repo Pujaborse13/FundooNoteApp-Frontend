@@ -266,3 +266,26 @@
   margin-bottom: 16px;
 }
 
+.label-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.label-badge {
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 13px;
+  color: #333;
+  white-space: nowrap;
+}
+
+
+.label-badge {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px; // or suitable value
+}

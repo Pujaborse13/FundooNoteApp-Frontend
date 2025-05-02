@@ -1,6 +1,76 @@
+/*.full-width {
+  width: 100%;
+}
+
 .actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.label-list {
+  margin-top: 20px;
+  font-family: 'Roboto', sans-serif;
+
+  h4 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: 500;
   }
-  
+}
+
+.label-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+
+.label-chip {
+  min-width: 60%;           // Increased width
+  min-height: 36px;           // Increased height
+  background-color: #dfe1e5;
+  color: #000000;
+  padding: 10px 20px;         // More padding for space inside
+  border-radius: 24px;        // Larger pill shape
+  font-size: 16px;            // Bigger text
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); // Optional for better visibility
+}
+
+*/
+
+
+
+.label-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.label-input {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  font-size: 16px;
+  padding: 4px 8px;
+}
+
+.label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+  gap: 10px;
+}
+
+.label-text {
+  flex: 1;
+  font-size: 15px;
+}

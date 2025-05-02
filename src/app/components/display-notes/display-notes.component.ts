@@ -6,6 +6,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateNotesComponent } from '../update-notes/update-notes.component';
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
 import { SetReminderComponent } from '../set-reminder/set-reminder.component';
+import { LabelService } from 'src/app/services/label/label.service';
+import { AssignLabelComponent } from '../assign-label/assign-label.component';
+
+interface Label {
+  labelId: number;
+  labelName: string;
+}
 
 interface Note {
   noteId: number
@@ -16,6 +23,7 @@ interface Note {
   isArchive: boolean;
   isTrash : boolean;
   reminder: Date;
+  labels?: Label[]; 
   //collaborators?: { email: string }[];
 
 }
@@ -41,6 +49,9 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
 
   @Input() isListView: boolean = false;
 
+  @Input() selectedLabel: string | null = null;
+
+
   
 
 
@@ -52,17 +63,27 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
   constructor(private noteService: NoteService , 
               private snackBar :MatSnackBar, 
               private route: ActivatedRoute,
-              private dialog: MatDialog ,
+              private dialog: MatDialog,
+              private labelService : LabelService,
             ) {}
+
 
   ngOnInit() {
    this.getNotes(); //display notes while loading 
     }
     
-    ngOnChanges() {
+  ngOnChanges() {
       // When showArchived changes, reload the notes
       this.getNotes();
     }
+
+
+    // ngOnChanges(changes: SimpleChanges) {
+    //   if (changes['showArchived'] || changes['showTrashed'] || changes['showReminder'] || changes['selectedLabel']) {
+    //     this.getNotes();
+    //   }
+    // }
+    
       
   
   getNotes()
@@ -72,7 +93,6 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
 
         console.log("API response:", res);
         this.allNotes = res.data ;
-
 
         if(this.showArchived){
           this.allNotes= this.allNotes.filter((note : Note ) => note.isArchive && !note.isTrash);
@@ -89,13 +109,20 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
             new Date(note.reminder).getTime() > 0 && // Check if it is a valid non-zero timestamp
             !note.isTrash
           );
-          //this.allNotes = this.allNotes.filter((note: Note) => !!note.reminder && !note.isTrash);
         }
+
+        // else if (this.selectedLabel) {
+        //   const labelToMatch = this.selectedLabel.toLowerCase();
+        //   this.allNotes = this.allNotes.filter(note =>
+        //     note.labels?.some(label => label.labelName.toLowerCase() === labelToMatch)
+        //   );
+        // }
+
         else
         {
           this.allNotes = this.allNotes.filter((note: Note) => !note.isArchive && !note.isTrash); // Show regular notes
         }
-
+        
       },
 
       error: (err) => {
@@ -259,24 +286,24 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
 
 
 
-  openNoteForEdit(note: any , event: MouseEvent) {
+  setReminder(note: Note, event: MouseEvent): void {
     event.stopPropagation();
+    const dialogRef = this.dialog.open(SetReminderComponent, {
+      data: { noteId: note.noteId }
+    });
     
-
-    const dialogRef = this.dialog.open(UpdateNotesComponent, {
-      data: note,
-      disableClose: true//Prevent closing without pressing the button
-    });
-
-    dialogRef.afterClosed().subscribe((updatedNote) => {
-      if (updatedNote) {
-        const index = this.allNotes.findIndex((n: any) => n.noteId === updatedNote.noteId);
-        if (index !== -1) {
-          this.allNotes[index] = updatedNote;
-        }
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getNotes(); // Refresh notes list
       }
-    });
+    });  
   }
+
+  //show future reminders only
+  isReminderValid(reminder: string | Date): boolean {
+    return new Date(reminder) > new Date(); 
+  }
+  
 
 
   openCollaboratorDialog(note: any, event: MouseEvent) {
@@ -295,6 +322,62 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
   }
 
 
+  onMoreClicked(event: MouseEvent): void {
+    event.stopPropagation();
+  }
+
+  openNoteForEdit(note: any , event: MouseEvent) {
+    event.stopPropagation();
+
+    const dialogRef = this.dialog.open(UpdateNotesComponent, {
+      data: note,
+      disableClose: true//Prevent closing without pressing the button
+    });
+
+    dialogRef.afterClosed().subscribe((updatedNote) => {
+      if (updatedNote) {
+        const index = this.allNotes.findIndex((n: any) => n.noteId === updatedNote.noteId);
+        if (index !== -1) {
+          this.allNotes[index] = updatedNote;
+        }
+      }
+    });
+  }
+
+  assignLabel(noteId: number, labelId: number) {
+    const payload = {
+      noteId: noteId,
+      labelId: labelId
+    };
+    this.labelService.assignLabelByNoteId(payload).subscribe({
+      next: () => {
+        this.snackBar.open('Label added to note.', 'Close', { duration: 3000 });
+        this.getNotes(); // Refresh
+      },
+      error: () => {
+        this.snackBar.open('Failed to assign label.', 'Close', { duration: 3000 });
+      }
+    });
+  }
+
+
+  openLabelDialog(note: any, event: MouseEvent): void {
+    event.stopPropagation();
+  
+    const dialogRef = this.dialog.open(AssignLabelComponent, {
+      width: '400px',
+      data: note
+    });
+  
+    dialogRef.afterClosed().subscribe((selectedLabels: any[]) => {
+      if (selectedLabels && selectedLabels.length > 0) {
+        for (const label of selectedLabels) {
+          this.assignLabel(note.noteId, label.labelId);
+        }
+      }
+    });
+  }
+
 
   onPinNote(note: Note, event: MouseEvent): void {
     event.stopPropagation();
@@ -303,35 +386,6 @@ export class DisplayNotesComponent implements OnInit,OnChanges{
   }
   
 
-
-  onMoreClicked(event: MouseEvent): void {
-    event.stopPropagation();
-  }
-  
-
-
-
-
-  setReminder(note: Note, event: MouseEvent): void {
-    event.stopPropagation();
-
-
-    const dialogRef = this.dialog.open(SetReminderComponent, {
-      data: { noteId: note.noteId }
-    });
-    
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getNotes(); // Refresh notes list
-      }
-    });  
-  }
-
-  //show future reminders only
-  isReminderValid(reminder: string | Date): boolean {
-    return new Date(reminder) > new Date(); 
-  }
-  
 
 
 

@@ -86,16 +86,22 @@
         <span class="sidenav-label" *ngIf="isSidenavExpanded">Reminders</span>
       </button>
 
+      <ng-container *ngFor="let label of labels">
+        <button mat-list-item [ngClass]="{ 'active': activeItem === label.labelName }" (click)="setActive(label.labelName)">
+          <mat-icon fontSet="material-icons-outlined">label</mat-icon>
+          <span class="sidenav-label" *ngIf="isSidenavExpanded">{{ label.labelName }}</span>
+        </button>
+      </ng-container>
 
       <button mat-list-item [ngClass]="{ 'active': activeItem === 'Labels' }" (click)="openEditLabelDialog()">
         <mat-icon fontSet="material-icons-outlined">edit</mat-icon>
         <span class="sidenav-label" *ngIf="isSidenavExpanded">Edit labels</span>
       </button>
       
-      <button mat-list-item [ngClass]="{ 'active': activeItem === 'Labels' }">
+      <!-- <button mat-list-item [ngClass]="{ 'active': activeItem === 'Labels' }">
         <mat-icon fontSet="material-icons-outlined">label</mat-icon>
         <span class="sidenav-label" *ngIf="isSidenavExpanded">Labels</span>
-      </button>
+      </button> -->
       
                             <!-- navigate to archive  -->
       <button mat-list-item [ngClass]="{ 'active': activeItem === 'Archive'}" (click)="setActive('Archive')">
@@ -118,7 +124,9 @@
         [showArchived]="showArchived" 
         [showTrashed] ="showTrashed"
         [showReminder]="showReminder"
-        [isListView]="isListView">
+        [isListView]="isListView"
+        [selectedLabel]="currentTitle !== 'Notes' && !showArchived && !showTrashed && !showReminder ? currentTitle : ''">
+        >
         
     </app-all-notes>
      <!-- <router-outlet></router-outlet>  -->

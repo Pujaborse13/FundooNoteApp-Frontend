@@ -1,86 +1,20 @@
-<!-- <h2 mat-dialog-title>Edit labels</h2>
-<mat-dialog-content>
-    <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>Create new label</mat-label>
-    <input matInput [(ngModel)]="labelName">
-  </mat-form-field>
-
-  <div class="actions">
-    <button mat-icon-button (click)="close()">
-      <mat-icon>close</mat-icon>
-    </button>
-
-    <button mat-icon-button (click)="createLabel()">
-      <mat-icon>check</mat-icon>
-    </button>
-  </div>
-
-    <!-- Show Created Labels -->
-    <!-- <div *ngIf="labelList.length > 0" class="label-list" style="margin-top: 20px;">
-        <h4>Created Labels:</h4>
-        <mat-chip-list>
-          <mat-chip *ngFor="let label of labelList">{{ label.labelName }}</mat-chip>
-        </mat-chip-list>
-    </div> -->
-    
-<!-- </mat-dialog-content>
-
-<mat-dialog-actions align="end">
-  <button mat-button (click)="close()">Done</button>
-</mat-dialog-actions> --> 
-<!-- --------------------------------- -->
-<!-- 
-<h2 mat-dialog-title>Edit labels</h2>
-
-<mat-dialog-content> -->
-  <!-- Input Field -->
-  <!-- <mat-form-field appearance="fill" style="width: 100%;">
-    <mat-label>Create new label</mat-label>
-    <input matInput [(ngModel)]="labelName">
-  </mat-form-field>
-
-  Action Buttons -->
-  <!-- <div class="actions">
-    <button mat-icon-button (click)="close()">
-      <mat-icon>close</mat-icon>
-    </button>
-
-    <button mat-icon-button (click)="createLabel()">
-      <mat-icon>check</mat-icon>
-    </button>
-  </div> -->
-
-  <!-- Show Created Labels -->
-  <!-- <div *ngIf="labelList.length > 0" class="label-list" style="margin-top: 20px;">
-    <h4>Created Labels:</h4>
-    <mat-chip-list>
-      <mat-chip *ngFor="let label of labelList">{{ label.labelName }}</mat-chip>
-    </mat-chip-list>
-  </div>
-</mat-dialog-content> -->
-
-<!-- <mat-dialog-actions align="end">
-  <button mat-button (click)="close()">Done</button>
-</mat-dialog-actions> -->
-
-
-
-
-<!-- 0------------------- -->
 <h2 mat-dialog-title>Edit labels</h2>
 
 <mat-dialog-content>
-  <!-- Input Field -->
-  <mat-form-field appearance="fill" style="width: 100%;">
-    <mat-label>Create new label</mat-label>
-    <input matInput [(ngModel)]="labelName">
-  </mat-form-field>
 
-  <!-- Action Buttons -->
-  <div class="actions" style="margin-top: 10px;">
+  <!-- Create New Label Input -->
+  <div class="label-input-container">
     <button mat-icon-button (click)="close()" aria-label="Close">
       <mat-icon>close</mat-icon>
     </button>
+
+    <input
+      matInput
+      placeholder="Create new label"
+      [(ngModel)]="labelName"
+      (keyup.enter)="createLabel()"
+      class="label-input"
+    />
 
     <button mat-icon-button color="primary" (click)="createLabel()" aria-label="Create">
       <mat-icon>check</mat-icon>
@@ -88,20 +22,20 @@
   </div>
 
   <!-- Show Created Labels -->
-  <div *ngIf="labelList.length > 0" class="label-list" style="margin-top: 20px;">
-    <h4>Created Labels:</h4>
-    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-      <span *ngFor="let label of labelList"
-            style="background-color: #e0e0e0; padding: 6px 12px; border-radius: 16px; font-size: 14px;">
-        {{ label.labelName }}
-      </span>
-    </div>
+  <div *ngFor="let label of labelList" class="label-row">
+    <button mat-icon-button (click)="deleteLabel(label)">
+      <mat-icon>delete</mat-icon>
+    </button>
+
+    <span class="label-text">{{ label.labelName }}</span>
+
+    <button mat-icon-button (click)="editLabel(label)">
+      <mat-icon>edit</mat-icon>
+    </button>
   </div>
+
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-button (click)="close()">Done</button>
 </mat-dialog-actions>
-
-
-
